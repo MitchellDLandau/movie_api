@@ -2,28 +2,6 @@ const http = require('http'),
 fs = require ('fs'),
 url = require ('url');
 
-// http.createServer((request, response) => {
-//   response.writeHead(200, {'Content-Type': 'text/plain'});           first server opened
-//   response.end('Hello Node!\n');
-// }).listen(8080);
-
-// console.log('My first Node test server is running on Port 8080.');
-
-
-
-
-// const fs = require('fs');
-
-// fs.readFile('input.text', (err, data) => {
-//     if (err) {
-//     throw err;
-// }
-// console.log('File content: ' + data.toString());
-// });
-
-
-
-
 http.createServer((request, response) => {      //http module used to set up the server. 
     let addr = request.url;
     q = url.parse(addr, true);
