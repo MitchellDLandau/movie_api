@@ -12,6 +12,27 @@ let movies = [
     },
     {
         name: 'Harry potter'
+    },
+    {
+        name: 'Ready Player One'
+    },
+    {
+        name: 'Django Unchained'
+    },
+    {
+        name: 'Avatar'
+    },
+    {
+        name: 'Apollo 11'
+    },
+    {
+        name: 'Black Panther'
+    },
+    {
+        name: 'The Dark Knight'
+    },
+    {
+        name: 'The Italian Job'
     }
 ];
 
