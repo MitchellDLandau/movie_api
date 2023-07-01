@@ -4,3 +4,60 @@ Movie REST API
 I am building the server side functionality for a movie application. 
 The application will provide users with information about movies, directors, and genres. 
 Users will be able to sign up, edit their personal information, and create a list of their favorite movies.
+
+I have included a table below to help users know how the api with work with data so they can use it to be able to create their own apps. 
+
++-------------------------+-----------------+----------------+----------------------------------+---------------------------------------+---------------------------------------+
+|       API Logic         |     URL         |   HTTP Method  |      Request Body Format         |           Response Body Format        |       Response data format            |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+|Get a list of all movies | /movies         | Get            |  None                            |   A JSON object holding data about    |[  {                                   |
+|                         |                 |                |                                  |   all of the movies in the library.   |    "title": "Return",                 |
+|                         |                 |                |                                  |                                       |    "Description": "Return",           |  
+|                         |                 |                |                                  |                                       |    "Genre": {"name": "Return",        |
+|                         |                 |                |                                  |                                       |              "Genre Description": ""} |
+|                         |                 |                |                                  |                                       |    "Director": { "Name": "Joe",       |
+|                         |                 |                |                                  |                                       |                  "Bio": "Bio"},       |
+|                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
+|                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+|Get a movie by its title | /movies/:title  | Get            |  None                            |   A JSON object with the data for a   |[  {                                   |
+|                         |                 |                |                                  |  Specific movie will be returned.     |    "title": "Return",                 |
+|                         |                 |                |                                  |                                       |    "Description": "Return",           | 
+|                         |                 |                |                                  |                                       |    "Genre": {"name": "Return",        |
+|                         |                 |                |                                  |                                       |              "Genre Description": ""} |
+|                         |                 |                |                                  |                                       |    "Director": { "Name": "Joe",       |
+|                         |                 |                |                                  |                                       |                  "Bio": "Bio"},       |
+|                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
+|                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+|Get the genre and        |/movies/genre    | Get            |  None                            | Returns a JSON object containing genre|{ "name": "Return",                    |
+| genre description by    |      /:genreName|                |                                  |  and the genre description.           |  "GenreDescription": "Return"         |
+| giving a genre          |                 |                |                                  |                                       |   }                                   |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+|Get the director and     |/movies/director | Get            |  None                            | Returns a JSON object containing the  |{ "Name": "Director",                  |
+|the directors information|  /:directorName |                |                                  | Director and their information.       |  "Bio": "Director Information"        |
+| with their name         |                 |                |                                  |                                       |   }                                   |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Add a new user          |   /users        | Post           |  {                               | Adds the new user to the list of users|The user *user* has been added to the  |
+|                         |                 |                |     "Name": "Jhon Doe",          | and gives the user a unique ID.       |system, their id number is *ID Number* |
+|                         |                 |                |     "favoriteMovie": "Rubber"    | Returns a string with the name and ID.|                                       |
+|                         |                 |                |     }                            |                                       |                                       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Add a favorite movie to | /users/:id      | Post           |  None                            | Adds a favorite movie to the object   |*Movie* has been added to id:* array.  |
+| a users account under   |    /:movieTitle |                |                                  | of the person under their             |                                       |
+| favoriteMovie:          |                 |                |                                  | favoriteMovies section. Returns a     |                                       |
+|                         |                 |                |                                  | string with the movie.                |                                       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Update a users name     |  /users/:id     | Put            |  {                               | Using the ID of the user you change   |{  "ID": "ID Number",                  |
+|                         |                 |                |     "name": "Joe Shmow"          | the saved name of the user.           |   "Name": "John Snow",                |
+|                         |                 |                |      }                           | Returns the user JSON object.         |   "favoriteMovies": "Movie array" }   |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Delete a user           |  /users/:id     | Delete         |  None                            | Deletes the user that has the id      |User *ID* has been deleted.            |
+|                         |                 |                |                                  | Provided. Returns string confirming   |                                       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Delete a favorite movie | /users/:id      | Delete         |  None                            | Deletes the movie in the url from the |"Movie" has been removed from id:#     |
+|  from a users list      |    /:movieTitle |                |                                  | Users favoriteMovie list.             |   fovorite movies.                    |
+|                         |                 |                |                                  | Returns a string confirming.          |                                       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|------------------------------------+
+
+
