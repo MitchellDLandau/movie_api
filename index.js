@@ -168,6 +168,19 @@ app.get('/movies', (req, res) => {
     };
  });
 
+  app.get('/movies/:Heroes', (req, res) => {
+    const { heroes } = req.params;
+    const movie = movies.find( movie => movie.heroes === heroes);
+
+    if (movie) {
+        res.status(200).json(movie);
+    } else {
+        res.status(400).send('No movie found with that hero');
+    };
+ });
+
+ app.get('')
+
 app.listen(8080, () => {
     console.log('app running on port 8080.');
 });

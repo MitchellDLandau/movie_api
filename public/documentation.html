@@ -38,6 +38,16 @@ I have included a table below to help users know how the api with work with data
 |the directors information|  /:directorName |                |                                  | Director and their information.       |  "Bio": "Director Information"        |
 | with their name         |                 |                |                                  |                                       |   }                                   |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
+| Get the movies by       | /movies/:heroes | Get            |  None                            | Returns a list of JSON objects        |[  {                                   |
+|  the hero that          |                 |                |                                  |  containing all the movies a given    |    "title": "Return",                 |
+|    is in them           |                 |                |                                  |   hero shows up in.                   |    "Description": "Return",           |
+|                         |                 |                |                                  |                                       |    "Genre": {"name": "Return",        |
+|                         |                 |                |                                  |                                       |              "Genre Description": ""} |
+|                         |                 |                |                                  |                                       |    "Director": { "Name": "Joe",       |
+|                         |                 |                |                                  |                                       |                  "Bio": "Bio"},       |
+|                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
+|                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Add a new user          |   /users        | Post           |  {                               | Adds the new user to the list of users|The user *user* has been added to the  |
 |                         |                 |                |     "Name": "Jhon Doe",          | and gives the user a unique ID.       |system, their id number is *ID Number* |
 |                         |                 |                |     "favoriteMovie": "Rubber"    | Returns a string with the name and ID.|                                       |
@@ -58,6 +68,6 @@ I have included a table below to help users know how the api with work with data
 | Delete a favorite movie | /users/:id      | Delete         |  None                            | Deletes the movie in the url from the |"Movie" has been removed from id:#     |
 |  from a users list      |    /:movieTitle |                |                                  | Users favoriteMovie list.             |   fovorite movies.                    |
 |                         |                 |                |                                  | Returns a string confirming.          |                                       |
-|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|------------------------------------+
+|-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 
 
