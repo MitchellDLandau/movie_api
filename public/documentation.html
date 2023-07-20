@@ -48,17 +48,18 @@ I have included a table below to help users know how the api with work with data
 |                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Add a new user          |   /users        | Post           |  {                               | Adds the new user to the list of users|The user *user* has been added to the  |
-|                         |                 |                |     "Name": "Jhon Doe",          | and gives the user a unique ID.       |system, their id number is *ID Number* |
-|                         |                 |                |     "favoriteMovie": "Rubber"    | Returns a string with the name and ID.|                                       |
-|                         |                 |                |     }                            |                                       |                                       |
+| Add a new user          |   /users        | Post           |  {                               | Adds the new user to the list of users| {  "ID": "ID Number",                 |
+|                         |                 |                |     "Username": "Jon Doe",       | and gives the user a unique ID.       |     "Name": "John Snow",              |
+|                         |                 |                |     "Password": "Password",      | Returns a string with the name and ID.|     "Password": "Password"            |
+|                         |                 |                |     "Birthday": "Birthdate"      |                                       |     "Birthday": "Birthdate"           |
+|                         |                 |                |     }                            |                                       |     "FavoriteMovies": []      }       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Add a favorite movie to | /users/:id      | Post           |  None                            | Adds a favorite movie to the object   |*Movie* has been added to id:* array.  |
+| Add a favorite movie to | /users/:Name    | Post           |  None                            | Adds a favorite movie to the object   |*Movie* has been added to id:* array.  |
 | a users account under   |    /:movieTitle |                |                                  | of the person under their             |                                       |
 | favoriteMovie:          |                 |                |                                  | favoriteMovies section. Returns a     |                                       |
 |                         |                 |                |                                  | string with the movie.                |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Update a users name     |  /users/:id     | Put            |  {                               | Using the ID of the user you change   |{  "ID": "ID Number",                  |
+| Update a users name     |  /users/:Name   | Put            |  {                               | Using the ID of the user you change   |{  "ID": "ID Number",                  |
 |                         |                 |                |     "name": "Joe Shmow"          | the saved name of the user.           |   "Name": "John Snow",                |
 |                         |                 |                |      }                           | Returns the user JSON object.         |   "favoriteMovies": "Movie array" }   |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
