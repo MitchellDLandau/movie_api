@@ -177,7 +177,7 @@ app.delete('/users/:id', (req, res) => {
 //     };
 //  });
 
-//2.8 (getting a user information)
+//2.8 getting all users information(Most likely not needed)
  app.get('/users', (req, res) => {
     Users.find()
     .then((users) => {
@@ -189,7 +189,7 @@ app.delete('/users/:id', (req, res) => {
     });
  });
 
- //2.8 get a user by their name
+ //2.8 get a user by their name (may not be needed)
  app.get('/users/:Username', (req, res) => {
  Users.findOne({Username: req.params.Username})
  .then ((user) => {
@@ -201,7 +201,7 @@ app.delete('/users/:id', (req, res) => {
  });
 });
 
- //2.8 (getting a json of all movies)
+ //2.8 *(getting a json of all movies)
  app.get('/movies', (req, res) => {
     Movies.find()
     .then((movie) => {
@@ -213,7 +213,7 @@ app.delete('/users/:id', (req, res) => {
     });
  });
 
- //2.8 (getting a movie via its title)
+ //2.8 *(getting a movie via its title)
  app.get('/movies/:Title', (req, res) => {
     Movies.findOne({Title: req.params.Title})
     .then ((movie) => {
@@ -229,7 +229,7 @@ app.delete('/users/:id', (req, res) => {
     });
  });
 
- //2.8 get movie via genre (marvel phase) name.
+ //2.8 *get movie via genre (marvel phase) name.
  app.get('/movies/Genre/:GenreName', (req, res) => {
     Movies.findOne({Genre: req.params.GenreName})
     .then ((genre) => {
@@ -245,7 +245,7 @@ app.delete('/users/:id', (req, res) => {
     });
  });
 
- //2.8 get director information.
+ //2.8 *get director information.
  app.get('/movies/director/:DirectorName', (req, res) => {
     Movies.findOne({Director: req.params.DirectorName})
     .then ((director) => {
@@ -262,10 +262,10 @@ app.delete('/users/:id', (req, res) => {
  })
 
  //2.8 Get movies that a requested hero is in.
-app.get('/movies/Heroes/:Hero', (req, res) => {
-    Movies.findOne({Hero: req.params.Hero})
-    .then((heroes) => {
-        res.status(200).json(heroes.Title)                      //Trying to return the movies a hero is in (Hero is stored in an array)
+app.get('/movies/Heroes/:Heroes', (req, res) => {
+    Movies.findOne({Heroes: req.params.Heroes})
+    .then((movies) => {
+        res.status(200).json(movies)                      //Trying to return the movies a hero is in (Hero is stored in an array) forEach?
     })
     .catch((err) => {
         console.error(err);
@@ -298,7 +298,7 @@ app.put('/movies/:Title', (req, res) => {
         });
 });
 
- //2.8 (Updating a Users information)
+ //2.8 *(Updating a Users information)
 app.put('users/:Username', (req, res) => {
     console.log(req.body);
     Users.findOneAndUpdate({Username: req.params.Username}, 
@@ -323,22 +323,22 @@ app.put('users/:Username', (req, res) => {
 });
 
 //2.8 Add a hero to a movie while not allowing changes to the rest of the movie.
-app.post('/movies/:Title/:Hero', (req, res) => {
-    Movies.findOneAndUpdate({Title: req.params.Title}, {
-        $push: {Heroes: req.params.Hero}
-    }, 
-    { new: true },
-    (err, updatedHeroes) => {
-    if (err) {
-        console.error(err)
-        res.status(500).send(`Error: ${err}`);              //Better way to update heroes without allowing to update whole movie.
-    } else {
-        res.json(updatedHeroes);
-    }
-    });
-});
+// app.post('/movies/:Title/:Hero', (req, res) => {
+//     Movies.findOneAndUpdate({Title: req.params.Title}, {
+//         $push: {Heroes: req.params.Hero}
+//     }, 
+//     { new: true },
+//     (err, updatedHeroes) => {
+//     if (err) {
+//         console.error(err)
+//         res.status(500).send(`Error: ${err}`);              //Better way to update heroes without allowing to update whole movie.
+//     } else {
+//         res.json(updatedHeroes);
+//     }
+//     });
+// });
 
- //2.8 (Adding a users favorite movies)
+ //2.8 *(Adding a users favorite movies)
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
     Users.findOneAndUpdate({Username: req.params.Username}, {
         $push: {FavoriteMovies: req.params.MovieID}
@@ -354,7 +354,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
     });
 });
 
-//2.8 (Adding a user)
+//2.8 *(Adding a user)
 app.post('/users', (req, res) => {
     console.log(req.body)
     Users.findOne({Username: req.body.Username})
@@ -411,9 +411,7 @@ app.post('/movies/new/:Title', (req, res) => {          //question can I use the
        });
     });
 
-//2.8 Delete a movie?
-
-//2.8 (Deleting a user)
+//2.8 *(Deleting a user)
 app.delete('/users/:Username', (req, res) => {
     Users.findOneAndRemove({Username: req.params.Username})
     .then((user) => {
@@ -429,7 +427,7 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-//2.8 Deleting a favorite movie from a users favorite movie array
+//2.8 *Deleting a favorite movie from a users favorite movie array
 app.delete('/users/:Username/:Title', (req, res) => {
     Users.findOneAndRemove({Username: req.params.Username})
     .then((user) => {
