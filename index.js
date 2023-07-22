@@ -17,24 +17,24 @@ const Heroes = Models.Heroes
 
 mongoose.connect('mongodb://localhost:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-let users = [
-    {
-        id: 1,
-        name: "Madi Stonewall",
-        favoriteMovies: ["Lion King"]
-    },
-    {
-        id: "2",
-        name: "Mitchell Landau",
-        favoriteMovies: ["Iron Man"]
-    },
-    {
-        id: "3",
-        name: "Loki Bean",
-        favoriteMovies: ["dog"]
-    }
+// let users = [
+//     {
+//         id: 1,
+//         name: "Madi Stonewall",
+//         favoriteMovies: ["Lion King"]
+//     },
+//     {
+//         id: "2",
+//         name: "Mitchell Landau",
+//         favoriteMovies: ["Iron Man"]
+//     },
+//     {
+//         id: "3",
+//         name: "Loki Bean",
+//         favoriteMovies: ["dog"]
+//     }
 
-];
+// ];
 
 let movies = [
     {
@@ -73,18 +73,18 @@ let movies = [
     }
 ];
 
-//Delete user
-app.delete('/users/:id', (req, res) => {
-    const { id } = req.params; 
-    let user = users.find(user => user.id == id);
+// //Delete user
+// app.delete('/users/:id', (req, res) => {
+//     const { id } = req.params; 
+//     let user = users.find(user => user.id == id);
 
-    if (user) {
-        users = users.filter(user => user.id != id)
-        res.status(200).send(`User ${id} has been deleted.`);
-    } else {
-        res.status(400).send(`User ${id} was not in the system.`);
-    }
-});
+//     if (user) {
+//         users = users.filter(user => user.id != id)
+//         res.status(200).send(`User ${id} has been deleted.`);
+//     } else {
+//         res.status(400).send(`User ${id} was not in the system.`);
+//     }
+// });
 //Post new movie to users favorites
 // app.post('/users/:id/:movieTitle', (req, res) => {
 //     const { id, movieTitle } = req.params;
@@ -231,10 +231,10 @@ app.delete('/users/:id', (req, res) => {
 
  //2.8 *get movie via genre (marvel phase) name.
  app.get('/movies/Genre/:GenreName', (req, res) => {
-    Movies.findOne({Genre: req.params.GenreName})
+    Movies.findOne({GenreName: req.params.Name})
     .then ((genre) => {
         if (genre) {
-            return res.status(200).json(genre);
+            return res.status(200).json(genre.Genre);
         } else {
             return res.status(404).send(`${genre} is not an MCU phase.`)    //using genre in the future for marvel phases
         }
@@ -247,10 +247,10 @@ app.delete('/users/:id', (req, res) => {
 
  //2.8 *get director information.
  app.get('/movies/director/:DirectorName', (req, res) => {
-    Movies.findOne({Director: req.params.DirectorName})
+    Movies.findOne({DirectorName: req.params.Name})
     .then ((director) => {
         if (director) {
-            res.status(200).json(director);
+            res.status(200).json(director.Director);
         } else {
             res.status(400).send(`${director} has not directed an MCU movie.`)
         }
@@ -258,14 +258,14 @@ app.delete('/users/:id', (req, res) => {
     .catch((err) => {
         console.error(err);
         res.status(500).send(`Error: ${err}`);
-    })
- })
+    });
+ });
 
  //2.8 Get movies that a requested hero is in.
 app.get('/movies/Heroes/:Heroes', (req, res) => {
-    Movies.findOne({Heroes: req.params.Heroes})
+    Movies.find({Heroes: req.params.Heroes})
     .then((movies) => {
-        res.status(200).json(movies)                      //Trying to return the movies a hero is in (Hero is stored in an array) forEach?
+        res.status(200).json(movies)             //Trying to return the movies a hero is in (Hero is stored in an array) forEach?
     })
     .catch((err) => {
         console.error(err);
@@ -274,34 +274,32 @@ app.get('/movies/Heroes/:Heroes', (req, res) => {
 });
 
 //2.8 Updating a movie.
-app.put('/movies/:Title', (req, res) => {
-    Movies.findOneAndUpdate({Title: req.params.Title},
+app.put('/movies/:Title', async (req, res) => {
+    await Movies.findOneAndUpdate({Title: req.params.Title},
         { $set:
             {
                 Title: req.body.Title,
                 Description: req.body.Description,
                 Genre: req.body.Genre, 
-                Director: req.body.Director,        //question about director information?
+                Director: req.body.Director,        //JUST UPDATED TO NEW MONGOOSE MODEL
                 ImagePath: req.body.imagePath,
-                Heroes: req.body.Heroes,            //question about heroes as it will be an array?
-                Villain: req.body.Villain           //update movie (Issues if everyone can use this). VVV Better version bellow! VVV
+                Heroes: req.body.Heroes,
+                Villain: req.body.Villain
             }
         },
-        { new: true },
-        (err, updatedMovie) => {
-            if(err) {
+        { new: true })
+        .then((updatedMovie) =>{
+            res.json(updatedMovie);
+        })
+        .catch((err) => {
                 console.error(err);
                 res.status(500).send(`Error: ${err}`);
-            } else {
-                res.json(updatedMovie);
-            }
         });
 });
 
  //2.8 *(Updating a Users information)
-app.put('users/:Username', (req, res) => {
-    console.log(req.body);
-    Users.findOneAndUpdate({Username: req.params.Username}, 
+app.put('/users/:Username', async (req, res) => {
+    await Users.findOneAndUpdate({Username: req.params.Username}, 
         { $set:
         {
             Username: req.body.Username,
@@ -310,17 +308,16 @@ app.put('users/:Username', (req, res) => {
             Birthday: req.body.Birthday
         }
     },
-    // console.log(req.body),
-    { new: true }, 
-    (err, updatedUser) => {
-        if(err) {
+    { new: true })
+    .then((updatedUser) =>{
+        res.json(updatedUser);
+    })
+    .catch((err) => {
             console.error(err);
             res.status(500).send(`Error: ${err}`);
-        } else {
-            res.json(updatedUser);
-        }
-    });
+    })    
 });
+
 
 //2.8 Add a hero to a movie while not allowing changes to the rest of the movie.
 // app.post('/movies/:Title/:Hero', (req, res) => {
@@ -339,18 +336,17 @@ app.put('users/:Username', (req, res) => {
 // });
 
  //2.8 *(Adding a users favorite movies)
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
-    Users.findOneAndUpdate({Username: req.params.Username}, {
-        $push: {FavoriteMovies: req.params.MovieID}
+app.post('/users/:Username/movies/:Title', async (req, res) => {
+    await Users.findOneAndUpdate({Username: (req.params.Username)}, {
+        $push: {FavoriteMovies: req.params.Title}
     },
-    { new: true},
-    (err, updatedUser) => {
-        if (err) {
-            console.error(err)
-            res.status(500).send(`Error: ${err}`);
-        } else {
-            res.json(updatedUser);
-        }
+    { new: true })
+    .then((updatedUser) => {
+        res.json(updatedUser);                  //Running in to a BSONError
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send(`Error: ${err}`);
     });
 });
 
@@ -360,7 +356,7 @@ app.post('/users', (req, res) => {
     Users.findOne({Username: req.body.Username})
     .then ((user) => {
         if (user) {
-            return res.status(400).send(req.body.Username + 'already exists.');
+            return res.status(400).send(`${req.body.Username} 'already exists.`);
         } else {
             Users.create(
                 {
@@ -382,22 +378,22 @@ app.post('/users', (req, res) => {
 });
 
 //2.8 Adding a new Movie to the DB
-app.post('/movies/new/:Title', (req, res) => {          //question can I use the same URL if I am using a different method ie. .get and .post
+app.post('/movies', (req, res) => {
     console.log(req.body)
-    Users.findOne({Title: req.body.Title})
-    .then ((movie) => {
+    Movies.findOne({Title: req.body.Title})
+    .then ((title) => {
         if (title) {
-            return res.status(400).send(`We already have ${title}`);
+            return res.status(400).send(`We already have ${title.Title}`);
         } else {
             Movies.create(
                 {
                     Title: req.body.Title,
                     Description: req.body.Description,
                     Genre: req.body.Genre, 
-                    Director: req.body.Director,        //question about director information?
+                    Director: req.body.Director,
                     ImagePath: req.body.imagePath,
-                    Heroes: req.body.Heroes,            //question about heroes as it will be an array?
-                    Villain: req.body.Villain           //update movie (Issues if everyone can use this). VVV Better version bellow! VVV
+                    Heroes: req.body.Heroes,
+                    Villain: req.body.Villain
                 })
                 .then((movie) => {res.status(201).json(movie)})
                 .catch((err) => {console.error(err);
@@ -418,12 +414,28 @@ app.delete('/users/:Username', (req, res) => {
         if (!user) {
             res.status(400).send(req.params.Username + ' was not found.');
         } else {
-            res.status(200).send(req.params.Username + 'was deleted.');
+            res.status(200).send(req.params.Username + ' was deleted.');
         }
     })
     .catch((err) => {
         console.error(err);
         res.status(500).send('Error: ' + err);
+    });
+});
+
+//2.8 Deleting a movie
+app.delete('/movies/:Title', (req, res) => {
+    Movies.findOneAndRemove({Title: req.params.Title})
+    .then((movie) => {
+    if (movie) {
+        res.status(200).send(`${movie.Title} has been removed from our records`);     //not sure if this is needed
+    } else {
+        return res.status(404).send(`${req.params.Title} is not in our reccords`);
+    }
+})
+    .catch((err) => {
+        console.error(err); 
+        res.status(500).send(`Error: ${err}`);
     });
 });
 
@@ -433,7 +445,7 @@ app.delete('/users/:Username/:Title', (req, res) => {
     .then((user) => {
     if (user) {
         user.favoriteMovies = user.favoriteMovies.filter(title => title = req.params.Title)
-        res.status(200).send(`${Title} has been removed from ${Username}'s fovorite movies.`);
+        res.status(200).send(`${Title} has been removed from ${Username}'s fovorite movies.`);  //Cannot show test until BSONError is fixed
     } else {
         res.status(400).send(`${Title} was not in ${Username}'s favorite movies`);
     }
