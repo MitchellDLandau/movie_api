@@ -77,8 +77,8 @@ URL endpoints as well as any required information, methods, formats, and the res
 |                         |                 |                |                                  | document of the users info.           |   "Birthday": "Birthdate"             |
 |                         |                 |                |                                  |                                       |   "FavoriteMovies": [] }              |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Add a favorite movie to | /users/:Name    | Post           |  None                            | Adds a favorite movie to the users    |*Movie* has been added to              |
-| a users account under   |    /:movieTitle |                |                                  | FavoriteMovies array in their         |       *Username*'s' favorites         |
+| Add a favorite movie to | /users/:Name/   | Post           |  None                            | Adds a favorite movie to the users    |*Movie* has been added to              |
+| a users account under   | movies/:movieID |                |                                  | FavoriteMovies array in their         |       *Username*'s' favorites         |
 | favoriteMovie:          |                 |                |                                  | account and returns response          |                                       |
 |                         |                 |                |                                  | confirming this has happened.         |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
@@ -106,7 +106,7 @@ URL endpoints as well as any required information, methods, formats, and the res
 |                         |                 |                |                                  |                                       |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Delete a favorite movie | /users/:Username| Delete         |  None                            | Deletes the movie in the url from the |"Movie" has been removed from          |
-|  from a users list      |    /:Title      |                |                                  | Users favoriteMovie list.             |  *Username*'s' fovorite movies.       |
+|  from a users list      | /movies/:movieID|                |                                  | Users favoriteMovie list.             |  *Username*'s' fovorite movies.       |
 |                         |                 |                |                                  | Returns a string confirming.          |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 
