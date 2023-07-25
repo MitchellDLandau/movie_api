@@ -13,13 +13,13 @@ const Genre = Models.Genre;
 const Directors =  Models.Director
 const Heroes = Models.Heroes
 
-mongoose.connect('mongodb://localhost:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //2.8 getting all users information
  app.get('/users', (req, res) => {
     Users.find()
     .then((users) => {
-        res.status(201).json(users);
+        res.status(200).json(users);
     })
     .catch((err) => {
         console.error(err);
@@ -58,7 +58,7 @@ mongoose.connect('mongodb://localhost:27017/MovieDB', {useNewUrlParser: true, us
         if (movie) {
             return res.status(200).json(movie);
         } else {
-            return res.status(404).send(`${movie} is not in our reccords`) //this is not required I am adding it to try and give more      information in my final project.
+            return res.status(404).send(`${movie} is not in our reccords`) 
         }
     })
     .catch((err) => {
@@ -103,7 +103,7 @@ mongoose.connect('mongodb://localhost:27017/MovieDB', {useNewUrlParser: true, us
 app.get('/movies/Heroes/:Heroes', (req, res) => {
     Movies.find({Heroes: req.params.Heroes})
     .then((movies) => {
-        res.status(200).json(movies)             //Trying to return the movies a hero is in (Hero is stored in an array) forEach?
+        res.status(200).json(movies)
     })
     .catch((err) => {
         console.error(err);
@@ -119,7 +119,7 @@ app.put('/movies/:Title', async (req, res) => {
                 Title: req.body.Title,
                 Description: req.body.Description,
                 Genre: req.body.Genre, 
-                Director: req.body.Director,        //JUST UPDATED TO NEW MONGOOSE MODEL
+                Director: req.body.Director,
                 ImagePath: req.body.imagePath,
                 Heroes: req.body.Heroes,
                 Villain: req.body.Villain
@@ -166,7 +166,7 @@ app.post('/users/:Username/movies/:MovieID', async (req, res) => {
                 if (!updatedUser) {
                     return res.status(404).send(`Error ${req.params.Username} does not exist.`)
                 } else {
-                res.json(updatedUser)};                  //Running in to a BSONError
+                res.json(updatedUser)};
             })
             .catch((err) => {
                 console.error(err);
@@ -189,7 +189,7 @@ app.post('/users', (req, res) => {
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
                 })
-            .then((user) => {res.status(201).json(user)})
+            .then((user) => {res.status(200).json(user)})
             .catch((err) => {console.error(err);
             res.status(500).send(`Error: ${err}`);
             })
@@ -219,7 +219,7 @@ app.post('/movies', (req, res) => {
                     Heroes: req.body.Heroes,
                     Villain: req.body.Villain
                 })
-                .then((movie) => {res.status(201).json(movie)})
+                .then((movie) => {res.status(200).json(movie)})
                 .catch((err) => {console.error(err);
                 res.status(500).send(`Error: ${err}`);
                 })
@@ -252,7 +252,7 @@ app.delete('/movies/:Title', (req, res) => {
     Movies.findOneAndRemove({Title: req.params.Title})
     .then((movie) => {
     if (movie) {
-        res.status(200).send(`${movie.Title} has been removed from the database.`);     //not sure if this is needed
+        res.status(200).send(`${movie.Title} has been removed from the database.`);
     } else {
         return res.status(404).send(`${req.params.Title} is not in our reccords.`);
     }

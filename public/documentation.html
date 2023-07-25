@@ -6,7 +6,8 @@ The application will provide users with information about movies, directors, and
 Users will be able to sign up, edit their personal information, and create a list of their favorite movies.
 
 I have included a table below to help users know how the api will work with data so they can use it to be able to create their own apps.
-URL endpoints as well as any required information, methods, formats, and the responses expected format is included in the table. 
+URL endpoints as well as any required information, methods, formats, and the responses expected format is included in the table.
+This application uses MongoDB and is currently set to work on port 8080. 
 
 +-------------------------+-----------------+----------------+----------------------------------+---------------------------------------+---------------------------------------+
 |       API Logic         |     URL         |   HTTP Method  |      Request Body Format         |           Response Body Format        |       Response data format            |
@@ -52,7 +53,7 @@ URL endpoints as well as any required information, methods, formats, and the res
 | with their name         |                 |                |                                  |                                       |   }                                   |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Get the movies by       | /movies/heroes  | Get            |  None                            | Returns a list of JSON objects        |   {                                   |
-|  the hero that          |    /:heroes     |                |                                  |  containing all the movies a given    |    "title": "Return",                 |
+|  the hero that          |    /:heroName   |                |                                  |  containing all the movies a given    |    "title": "Return",                 |
 |    is in them           |                 |                |                                  |  hero shows up in.                    |    "Description": "Return",           |
 |                         |                 |                |                                  |                                       |    "Genre": {"name": "Return",        |
 |                         |                 |                |                                  |                                       |              "Genre Description": ""} |
@@ -105,8 +106,8 @@ URL endpoints as well as any required information, methods, formats, and the res
 |  the database           |                 |                |                                  | database and confirms                 |    the database.                      |
 |                         |                 |                |                                  |                                       |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Delete a favorite movie | /users/:Username| Delete         |  None                            | Deletes the movie in the url from the |"Movie" has been removed from          |
-|  from a users list      | /movies/:movieID|                |                                  | Users favoriteMovie list.             |  *Username*'s' fovorite movies.       |
+| Delete a favorite movie | /users/:Username| Delete         |  None                            | Deletes the movie in the url from the |"MovieID" has been removed from        |
+|  from a users list      | /movies/:movieID|                |                                  | Users favoriteMovie list.             |  *Username*'s fovorite movies.        |
 |                         |                 |                |                                  | Returns a string confirming.          |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 
