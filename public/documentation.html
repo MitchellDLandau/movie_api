@@ -21,8 +21,8 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
 |                         |                 |                |                                  |                                       |     "FavoriteMovies": []      }       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| return a user with their| /users/Name     | Get            |  None                            | JSON document is returned with        | {  "ID": "ID Number",                 |
-|  name                   |                 |                |                                  | the users information                 |     "Name": "John Snow",              |
+| return a user with their| /users/:userID  | Get            |  None                            | JSON document is returned with        | {  "ID": "ID Number",                 |
+|  userID                 |                 |                |                                  | the users information                 |     "Name": "John Snow",              |
 |                         |                 |                |                                  |                                       |     "Password": "Password"            |
 |                         |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
 |                         |                 |                |                                  |                                       |     "FavoriteMovies": []      }       |
@@ -37,8 +37,8 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-|Get a movie by its title | /movies/:title  | Get            |  None                            |   A JSON object with the data for a   |[  {                                   |
-|                         |                 |                |                                  |  Specific movie will be returned.     |    "title": "Return",                 |
+|Get a movie by its       | /movies/:movieID| Get            |  None                            |   A JSON object with the data for a   |[  {                                   |
+|   movieID               |                 |                |                                  |  Specific movie will be returned.     |    "title": "Return",                 |
 |                         |                 |                |                                  |                                       |    "Description": "Return",           | 
 |                         |                 |                |                                  |                                       |    "Genre": {"name": "Return",        |
 |                         |                 |                |                                  |                                       |              "Genre Description": ""} |
@@ -65,7 +65,7 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |                                  |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |                                  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Update a movies info    | /movies/:Title  | Put            |  {                               | Returns a JSON object containing      |   {                                   |
+| Update a movies info    | /movies/:movieID| Put            |  {                               | Returns a JSON object containing      |   {                                   |
 |                         |                 |                |    "title": "Required",          |  the movie with it's updated info     |    "title": "Return",                 |
 |                         |                 |                |    "Description": "Required",    |                                       |    "Description": "Return",           |
 |                         |                 |                |    "Genre": {"name": "Data",     |                                       |    "Genre": {"name": "Return",        |
@@ -75,7 +75,7 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |    "imageURL": "URL",            |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |    "Featured": "true of false"}  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Update a users name     | /users/:Username| Put            |  {                               | With the username you can update any  |{  "ID": "ID Number",                  |
+| Update a users info     | /users/:userID  | Put            |  {                               | With the userID you can update any    |{  "ID": "ID Number",                  |
 |                         |                 |                |     "name": "Joe Shmow"          | information that the user has saved   |   "Name": "John Snow",                |
 |                         |                 |                |      }                           | on their account profile returns JSON |   "Password": "Password"              |
 |                         |                 |                |                                  | document of the users info.           |   "Birthday": "Birthdate"             |
@@ -102,12 +102,12 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |    "imageURL": "URL",            |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |    "Featured": "true of false"}  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Delete a user           | /users/:Username| Delete         |  None                            | Deletes the user with the Username    | *Username* was deleted.               |
+| Delete a user           | /users/:userID  | Delete         |  None                            | Deletes the user with the ID          | *Username* was deleted.               |
 |                         |                 |                |                                  | Provided. Returns string confirming.  |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
-| Delete a movie from     | /movie/:Title   | Delete         |  None                            | Deletes the movie in the url from the | *Title* has been removed from         |
-|  the database           |                 |                |                                  | database and confirms                 |    the database.                      |
-|                         |                 |                |                                  |                                       |                                       |
+| Delete a movie from     | /movie/:movieID | Delete         |  None                            | Deletes a movie by the movieID        | *Title* has been removed from         |
+|  the database           |                 |                |                                  | from the database and send            |    the database.                      |
+|                         |                 |                |                                  | confirmation                          |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Delete a favorite movie | /users/:Username| Delete         |  None                            | Deletes the movie in the url from the |"MovieID" has been removed from        |
 |  from a users list      | /movies/:movieID|                |                                  | Users favoriteMovie list.             |  *Username*'s fovorite movies.        |

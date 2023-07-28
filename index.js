@@ -28,8 +28,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
  });
 
  //2.8 get a user by their name (may not be needed)
- app.get('/users/:Username', (req, res) => {
- Users.findOne({Username: req.params.Username})
+ app.get('/users/:userID', (req, res) => {
+ Users.findOne({_id: req.params.userID})
  .then ((user) => {
      res.json(user);
  })
@@ -52,8 +52,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
  });
 
  //2.8 *(getting a movie via its title)
- app.get('/movies/:Title', (req, res) => {
-    Movies.findOne({Title: req.params.Title})
+ app.get('/movies/:movieID', (req, res) => {
+    Movies.findOne({_id: req.params.movieID})
     .then ((movie) => {
         if (movie) {
             return res.status(200).json(movie);
@@ -112,8 +112,8 @@ app.get('/movies/Heroes/:Heroes', (req, res) => {
 });
 
 //2.8 Updating a movie.
-app.put('/movies/:Title', async (req, res) => {
-    await Movies.findOneAndUpdate({Title: req.params.Title},
+app.put('/movies/:movieID', async (req, res) => {
+    await Movies.findOneAndUpdate({_id: req.params.movieID},
         { $set:
             {
                 Title: req.body.Title,
@@ -136,8 +136,8 @@ app.put('/movies/:Title', async (req, res) => {
 });
 
  //2.8 *(Updating a Users information)
-app.put('/users/:Username', async (req, res) => {
-    await Users.findOneAndUpdate({Username: req.params.Username}, 
+app.put('/users/:userID', async (req, res) => {
+    await Users.findOneAndUpdate({_id: req.params.userID}, 
         { $set:
         {
             Username: req.body.Username,
@@ -232,13 +232,13 @@ app.post('/movies', (req, res) => {
     });
 
 //2.8 *(Deleting a user)
-app.delete('/users/:Username', (req, res) => {
-    Users.findOneAndRemove({Username: req.params.Username})
+app.delete('/users/:userID', (req, res) => {
+    Users.findOneAndRemove({_id: req.params.userID})
     .then((user) => {
         if (!user) {
-            res.status(400).send(`${req.params.Username} was not found.`);
+            res.status(400).send(`${user.Username} was not found.`);
         } else {
-            res.status(200).send(`${req.params.Username} was deleted.`);
+            res.status(200).send(`${user.Username} was deleted.`);
         }
     })
     .catch((err) => {
@@ -248,13 +248,13 @@ app.delete('/users/:Username', (req, res) => {
 });
 
 //2.8 Deleting a movie
-app.delete('/movies/:Title', (req, res) => {
-    Movies.findOneAndRemove({Title: req.params.Title})
+app.delete('/movies/:movieID', (req, res) => {
+    Movies.findOneAndRemove({_id: req.params.movieID})
     .then((movie) => {
     if (movie) {
         res.status(200).send(`${movie.Title} has been removed from the database.`);
     } else {
-        return res.status(404).send(`${req.params.Title} is not in our reccords.`);
+        return res.status(404).send(`${movie.Title} is not in our reccords.`);
     }
 })
     .catch((err) => {
