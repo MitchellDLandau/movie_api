@@ -187,31 +187,31 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {sessi
     });
 
 //2.8 ~*(Adding a user)
-app.post('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    console.log(req.body)
-    Users.findOne({Username: req.body.Username})
-    .then ((user) => {
-        if (user) {
-            return res.status(400).send(`${req.body.Username} already exists.`);
-        } else {
-            Users.create(
-                {
-                Username: req.body.Username,
-                Password: req.body.Password,
-                Email: req.body.Email,
-                Birthday: req.body.Birthday
-                })
-            .then((user) => {res.status(200).json(user)})
-            .catch((err) => {console.error(err);
-            res.status(500).send(`Error: ${err}`);
-            })
-        }
-    })
-    .catch((err) => {
-        console.error(err);
-        res.status(500).send(`Error: ${err}`);
-    });
-});
+// app.post('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
+//     console.log(req.body)
+//     Users.findOne({Username: req.body.Username})
+//     .then ((user) => {
+//         if (user) {
+//             return res.status(400).send(`${req.body.Username} already exists.`);
+//         } else {
+//             Users.create(
+//                 {
+//                 Username: req.body.Username,
+//                 Password: req.body.Password,
+//                 Email: req.body.Email,
+//                 Birthday: req.body.Birthday
+//                 })
+//             .then((user) => {res.status(200).json(user)})
+//             .catch((err) => {console.error(err);
+//             res.status(500).send(`Error: ${err}`);
+//             })
+//         }
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//         res.status(500).send(`Error: ${err}`);
+//     });
+// });
 
 //2.8 Adding a new Movie to the DB   (Need to impliment admin)
 app.post('/movies', (req, res) => {
