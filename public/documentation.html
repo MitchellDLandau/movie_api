@@ -12,19 +12,30 @@ This application uses MongoDB and is currently set to work on port 8080.
 Make sure all required dependencies are installed including "body-parser": "^1.20.2", "express": "^4.18.2", "mongoose": "^7.3.4", "uuid": "^9.0.0" are installed. 
 The MongoDB should be running with the name given to it ie. MovieDB and the node index.js should be run to start the server.
 
+A single user is added in the DB that is allowed to use certain functions when their hashed password is confirmed and their given id matches. 
+This is hard coded into the API, new users can be made admins by inserting the code below with the new administrators information.
+Once added enclose primary (req.user.Password) and (final administrator) in another () to activate all administrators.
+
+    (
+    (first admins code allowing access)
+    && 
+    (req.user.Password !== ('new admin hashed password') &&
+    req.user.id !== ('new admin id'))
+    )
+
 +-------------------------+-----------------+----------------+----------------------------------+---------------------------------------+---------------------------------------+
 |       API Logic         |     URL         |   HTTP Method  |      Request Body Format         |           Response Body Format        |       Response data format            |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | return all users        | /users          | Get            |  None                            | JSON document is returned with a list | {  "ID": "ID Number",                 |
 |                         |                 |                |                                  | of all users that are currently in    |     "Name": "John Snow",              |
 |                         |                 |                |                                  | the system                            |     "Password": "Password"            |
-|                         |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
+|     (ADMIN ONLY)        |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
 |                         |                 |                |                                  |                                       |     "FavoriteMovies": []      }       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | return a user with their| /users/:userID  | Get            |  None                            | JSON document is returned with        | {  "ID": "ID Number",                 |
 |  userID                 |                 |                |                                  | the users information                 |     "Name": "John Snow",              |
 |                         |                 |                |                                  |                                       |     "Password": "Password"            |
-|                         |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
+|     (ADMIN ONLY)        |                 |                |                                  |                                       |     "Birthday": "Birthdate"           |
 |                         |                 |                |                                  |                                       |     "FavoriteMovies": []      }       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 |Get a list of all movies | /movies         | Get            |  None                            |   A JSON object holding data about    |[  {                                   |
@@ -70,7 +81,7 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |    "Description": "Required",    |                                       |    "Description": "Return",           |
 |                         |                 |                |    "Genre": {"name": "Data",     |                                       |    "Genre": {"name": "Return",        |
 |                         |                 |                |         "Genre Description": ""} |                                       |              "Genre Description": ""} |
-|                         |                 |                |    "Director": { "Name": "Name", |                                       |    "Director": { "Name": "Joe",       |
+|     (ADMIN ONLY)        |                 |                |    "Director": { "Name": "Name", |                                       |    "Director": { "Name": "Joe",       |
 |                         |                 |                |                 "Bio": "Bio"},   |                                       |                  "Bio": "Bio"},       |
 |                         |                 |                |    "imageURL": "URL",            |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |    "Featured": "true of false"}  |                                       |    "Featured": "true of false"}       |
@@ -98,7 +109,7 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |                         |                 |                |    "Genre": {"name": "Name",     |                                       |    "Genre": {"name": "Return",        |
 |                         |                 |                |         "Genre Description": ""} |                                       |              "Genre Description": ""} |
 |                         |                 |                |    "Director": { "Name": "Name", |                                       |    "Director": { "Name": "Joe",       |
-|                         |                 |                |                 "Bio": "Bio"},   |                                       |                  "Bio": "Bio"},       |
+|      (ADMIN ONLY)       |                 |                |                 "Bio": "Bio"},   |                                       |                  "Bio": "Bio"},       |
 |                         |                 |                |    "imageURL": "URL",            |                                       |    "imageURL": "URL",                 |
 |                         |                 |                |    "Featured": "true of false"}  |                                       |    "Featured": "true of false"}       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
@@ -107,7 +118,7 @@ The MongoDB should be running with the name given to it ie. MovieDB and the node
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Delete a movie from     | /movie/:movieID | Delete         |  None                            | Deletes a movie by the movieID        | *Title* has been removed from         |
 |  the database           |                 |                |                                  | from the database and send            |    the database.                      |
-|                         |                 |                |                                  | confirmation                          |                                       |
+|      (ADMIN ONLY)       |                 |                |                                  | confirmation                          |                                       |
 |-------------------------+-----------------+----------------+----------------------------------+---------------------------------------|---------------------------------------+
 | Delete a favorite movie | /users/:Username| Delete         |  None                            | Deletes the movie in the url from the |"MovieID" has been removed from        |
 |  from a users list      | /movies/:movieID|                |                                  | Users favoriteMovie list.             |  *Username*'s fovorite movies.        |

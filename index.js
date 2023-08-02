@@ -36,8 +36,13 @@ const Heroes = Models.Heroes
 
 mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-//2.8 getting all users information (need to impliment admin)
- app.get('/users', (req, res) => {
+//getting all users information (ADMIN ONLY)
+ app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
+    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
+    req.user.id !== ('64c973a1168299140e1d638a'))
+    { 
+        return res.status(400).send('Only administrators can use this function.');
+    }
     Users.find()
     .then((users) => {
         res.status(200).json(users);
@@ -48,8 +53,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
     });
  });
 
- //2.8 get a user by their ID (need to impliment admin)
- app.get('/users/:userID', (req, res) => {
+ //get a user by their ID (ADMIN ONLY)
+ app.get('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
+    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
+    req.user.id !== ('64c973a1168299140e1d638a'))
+    {
+        return res.status(400).send('Only administrators can use this function.');
+    }
  Users.findOne({_id: req.params.userID})
  .then ((user) => {
      res.json(user);
@@ -60,7 +70,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
  });
 });
 
- //2.8 ~*(getting a json of all movies)
+ //(getting a json of all movies)
  app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     await Movies.find()
     .then((movie) => {
@@ -72,7 +82,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
     });
  });
 
- //2.8 ~*(getting a movie via its ID)
+ //(getting a movie via its ID)
  app.get('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({_id: req.params.movieID})
     .then ((movie) => {
@@ -88,14 +98,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
     });
  });
 
- //2.8 ~*get movie via genre (marvel phase) name.
+ //get movie via genre (marvel phase) name.
  app.get('/movies/Genre/:GenreName', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({GenreName: req.params.Name})
     .then ((genre) => {
         if (genre) {
             return res.status(200).json(genre.Genre);
         } else {
-            return res.status(404).send(`${genre} is not an MCU phase.`)    //using genre in the future for marvel phases
+            return res.status(404).send(`${genre} is not an MCU phase.`)
         }
     })
     .catch((err) => {
@@ -104,7 +114,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
     });
  });
 
- //2.8 ~*get director information.
+ //get director information.
  app.get('/movies/director/:DirectorName', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({DirectorName: req.params.Name})
     .then ((director) => {
@@ -120,7 +130,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
     });
  });
 
- //2.8 ~Get movies that a requested hero is in.
+ //Get movies that a requested hero is in.
 app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.find({Heroes: req.params.Heroes})
     .then((movies) => {
@@ -132,8 +142,13 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
     });
 });
 
-//2.8 Updating a movie.          (Need to impliment admin)   ~~~~~~~~~~~~~~~~
-app.put('/movies/:movieID', async (req, res) => {
+//Updating a movie.          (ADMIN ONLY)
+app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
+    req.user.id !== ('64c973a1168299140e1d638a'))
+    {
+        return res.status(400).send('Only administrators can update a movies information.');
+    }
     await Movies.findOneAndUpdate({_id: req.params.movieID},
         { $set:
             {
@@ -156,7 +171,7 @@ app.put('/movies/:movieID', async (req, res) => {
         });
 });
 
- //2.8 ~*(Updating a Users information) ~~~~~~~~~~~~~
+ //(Updating a Users information)
 app.put('/users/:userID', passport.authenticate('jwt', {session: false}),
 [
     check('Username', '1Username must be 6 characters').isLength({min: 6}),
@@ -165,8 +180,8 @@ app.put('/users/:userID', passport.authenticate('jwt', {session: false}),
     check('Email', '1Email does not seem to be valid.').isEmail()
 ],
  async (req, res) => {
-    let errors = validationResult(req);     //This works but can I make it so only one needs to be entered and not all info again
-    if(!errors.isEmpty()) {                 //Or will this be easily accomplished on the back end by passing through old info?
+    let errors = validationResult(req);
+    if(!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     }
     if(req.user.id !== req.params.userID){
@@ -192,7 +207,7 @@ app.put('/users/:userID', passport.authenticate('jwt', {session: false}),
     })    
 });
 
- //2.8 ~*(Adding a users favorite movies) 
+ //(Adding a users favorite movies) 
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
@@ -213,7 +228,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {sessi
             });
     });
 
-//2.8 ~*(Adding a user) ~~~~~~~~~~
+//Adding a user)
 app.post('/users', 
 [
     check('Username', 'Username is required.').isLength({min: 6}),
@@ -252,11 +267,11 @@ async (req, res) => {
     });
 });
 
-//2.8 Adding a new Movie to the DB   (Need to impliment admin)   ~~~~~~~~~~~~~
-app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {                      //added passport
+//Adding a new Movie to the DB   (ADMIN ONLY)
+app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a')){                                                  //added whole if statement up to line 259
-        return res.status(400).send('Permission denied');
+    req.user.id !== ('64c973a1168299140e1d638a')){
+        return res.status(400).send('Only Administrators can add new movies.');
     }
     console.log(req.body)
     Movies.findOne({Title: req.body.Title})
@@ -286,7 +301,7 @@ app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) =
        });
     });
 
-//2.8 ~*(Deleting a user)
+//(Deleting a user)
 app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(req.user.id !== req.params.userID){
         return res.status(400).send('Permission denied');
@@ -305,8 +320,12 @@ app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (re
     });
 });
 
-//2.8 Deleting a movie                  (Need to impliment Admin)   64c973a1168299140e1d638a
-app.delete('/movies/:movieID', (req, res) => {
+//Deleting a movie    (ADMIN ONLY)
+app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
+    if(req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
+    req.user.id !== ('64c973a1168299140e1d638a')){
+        return res.status(400).send('Only administrators can delete a movie.');
+    }
     Movies.findOneAndRemove({_id: req.params.movieID})
     .then((movie) => {
     if (movie) {
@@ -321,7 +340,7 @@ app.delete('/movies/:movieID', (req, res) => {
     });
 });
 
-//2.8 ~*Deleting a favorite movie from a users favorite movie array
+//Deleting a favorite movie from a users favorite movie array
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
@@ -350,36 +369,3 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {ses
 app.listen(8080, () => {
     console.log('app running on port 8080.');
 });
-
-
-
-//{
-//     "Username": "Mitchell",
-//     "Password": "Mitch",
-//     "Email": "Mitch@gmail.com",
-//     "Authorization": "Admin"
-// }
-
-//Mitchell Auth code: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM5NzNhMTE2ODI5OTE0MGUxZDYzOGEiLCJVc2VybmFtZSI6Ik1pdGNoIiwiUGFzc3dvcmQiOiIkMmIkMTAkcll1N0tUUXI0Qkc3NzQwT3ZhRUk2dUsyY29qY0N0b1lxMS4uTjlGWm5SMWF5Tk1OMW5NMzIiLCJFbWFpbCI6Ik1pdGNoQGdtYWlsLmNvbSIsIkZhdm9yaXRlTW92aWVzIjpbXSwiX192IjowLCJpYXQiOjE2OTA5MjM5NjMsImV4cCI6MTY5MTUyODc2Mywic3ViIjoiTWl0Y2gifQ.jncz31MfJQJvd9HE5NxM2E_Z8zbYdlKAk_O8Ep6IFHQ"
-
-//Mitchell ID "64c973a1168299140e1d638a"
-
-// Madi "_id": "64c93da7ededc7176ecf4569"
-
-//Madi Auth code: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM5M2RhN2VkZWRjNzE3NmVjZjQ1NjkiLCJVc2VybmFtZSI6Ik1hZGkiLCJQYXNzd29yZCI6IiQyYiQxMCRJOC44MWQua0dMUnVlQnpTV1dlYXgueVRhNHhJbEU1a3BudEo0VTdNTWhCa1VPQ2RLNHhJbSIsIkVtYWlsIjoiTWFkaUBnbWFpbC5jb20iLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjkwOTI3OTIxLCJleHAiOjE2OTE1MzI3MjEsInN1YiI6Ik1hZGkifQ.amoAppIAL8sMkGykbvoh1EoR1u8uWn43-IZuxTXhBP0
-
-// {
-//     "Title": "Testing",
-//     "Description": "Testing description"
-// }
-
-// {
-//     "_id": "64c93847ededc7176ecf455c",
-//     "Username": "Austin",
-//     "Password": "$2b$10$GzAjWl0.DW97dTl2TFwPtupGrpQNlkmSP0Dm.Wd0w0yu0QYLukM9y",
-//     "Email": "Austin",
-//     "FavoriteMovies": [],
-//     "__v": 0
-// },
-
-// Austin auth code: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM5Mzg0N2VkZWRjNzE3NmVjZjQ1NWMiLCJVc2VybmFtZSI6IkF1c3RpbiIsIlBhc3N3b3JkIjoiJDJiJDEwJEd6QWpXbDAuRFc5N2RUbDJURndQdHVwR3JwUU5sa21TUDBEbS5XZDB3MHl1MFFZTHVrTTl5IiwiRW1haWwiOiJBdXN0aW4iLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjkwOTI5MzkwLCJleHAiOjE2OTE1MzQxOTAsInN1YiI6IkF1c3RpbiJ9.XMbpnZaOJjI3HAw61bQeU9-tuel8UqDvUl23BMoImas
