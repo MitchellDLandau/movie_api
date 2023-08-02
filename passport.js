@@ -23,10 +23,10 @@ passport.use(
                         message: 'Incorrect username or password.',
                     });
                 }
-                // if (!user.validatePassword(Password)) {
-                //     console.log('Incorrect password');                               //According to forum this is for 2.10
-                //     return callback(null, false, {message: 'Incorrect password.'});//Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM1NjgyMDUzYjVjYTRmNDIyODM3YWUiLCJVc2VybmFtZSI6Ik1pdGNoZWxsIiwiUGFzc3dvcmQiOiJNaXRjaGVsbCIsIkVtYWlsIjoiTWl0Y2hlbGxAZ21haWwuY29tIiwiQmlydGhkYXkiOiIxOTY5LTA0LTIwVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjkwNjYyNjAwLCJleHAiOjE2OTEyNjc0MDAsInN1YiI6Ik1pdGNoZWxsIn0.i13URKRuQ4GmaE3WTY0bcS5ha1CA3lHdNvue5o8JumU
-                // }
+                if (!user.validatePassword(password)) {
+                    console.log('Incorrect password');
+                    return callback(null, false, {message: 'Incorrect password.'});
+                }
                 console.log('finished');
                 return callback(null, user);
             })
