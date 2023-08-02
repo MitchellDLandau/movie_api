@@ -366,6 +366,11 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {ses
     res.status(200).send("Connected")
  });
 
-app.listen(8080, () => {
-    console.log('app running on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port,'0.0.0.0', () => {
+    console.log('app running on port ' + port);
 });
+
+// app.listen(8080, () => {
+//     console.log('running on port 8080');
+// });
