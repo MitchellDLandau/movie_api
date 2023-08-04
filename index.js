@@ -34,14 +34,15 @@ const Genre = Models.Genre;
 const Directors =  Models.Director
 const Heroes = Models.Heroes
 
-mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a'))
+    if (req.user.Authentification !== ('True'))
     { 
-        return res.status(400).send('Only administrators can use this function.');
+        return res.status(400).send('Only moderators can use this function.');
     }
     Users.find()
     .then((users) => {
@@ -55,10 +56,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, us
 
  //get a user by their ID (ADMIN ONLY)
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a'))
-    {
-        return res.status(400).send('Only administrators can use this function.');
+    if (req.user.Authentification !== ('True'))
+    { 
+        return res.status(400).send('Only moderators can use this function.');
     }
  Users.findOne({_id: req.params.userID})
  .then ((user) => {
@@ -144,10 +144,9 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
 
 //Updating a movie.          (ADMIN ONLY)
 app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a'))
-    {
-        return res.status(400).send('Only administrators can update a movies information.');
+    if (req.user.Authentification !== ('True'))
+    { 
+        return res.status(400).send('Only moderators can update a movies information.');
     }
     await Movies.findOneAndUpdate({_id: req.params.movieID},
         { $set:
@@ -253,7 +252,8 @@ async (req, res) => {
                 Username: req.body.Username,
                 Password: hashedPassword,
                 Email: req.body.Email,
-                Birthday: req.body.Birthday
+                Birthday: req.body.Birthday,
+                Authorized: false
                 })
             .then((user) => {res.status(200).json(user)})
             .catch((err) => {console.error(err);
@@ -269,9 +269,9 @@ async (req, res) => {
 
 //Adding a new Movie to the DB   (ADMIN ONLY)
 app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if(req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a')){
-        return res.status(400).send('Only Administrators can add new movies.');
+    if (req.user.Authentification !== ('True'))
+    { 
+        return res.status(400).send('Only moderators can add new movies.');
     }
     console.log(req.body)
     Movies.findOne({Title: req.body.Title})
@@ -322,9 +322,9 @@ app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (re
 
 //Deleting a movie    (ADMIN ONLY)
 app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if(req.user.Password !== ('$2b$10$Hf7vapuVRymgKbANoLZ69etI5CmdnpLZyu0YmQ0eLcaaZdsCCX7ui') && 
-    req.user.id !== ('64c973a1168299140e1d638a')){
-        return res.status(400).send('Only administrators can delete a movie.');
+    if (req.user.Authentification !== ('True'))
+    { 
+        return res.status(400).send('Only moderators can delete a movie.');
     }
     Movies.findOneAndRemove({_id: req.params.movieID})
     .then((movie) => {

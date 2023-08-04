@@ -12,16 +12,10 @@ This application uses MongoDB and is currently set to work on port 8080.
 Make sure all required dependencies are installed including "body-parser": "^1.20.2", "express": "^4.18.2", "mongoose": "^7.3.4", "uuid": "^9.0.0" are installed. 
 The MongoDB should be running with the name given to it ie. MovieDB and the node index.js should be run to start the server.
 
-A single user is added in the DB that is allowed to use certain functions when their hashed password is confirmed and their given id matches. 
-This is hard coded into the API, new users can be made admins by inserting the code below with the new administrators information.
-Once added enclose primary (req.user.Password) and (final administrator) in another () to activate all administrators.
+An authorized moderator can be added by making the authorized in the database under authorization. If this is set to True they will be able to access the endpoints
+listed as (ADMIN ONLY) to be able to make more modifications to the data in the database. All users will have this setting automatically 
+set to false when new accounts are made. 
 
-    (
-    (first admins code allowing access)
-    && 
-    (req.user.Password !== ('new admin hashed password') &&
-    req.user.id !== ('new admin id'))
-    )
 
 +-------------------------+-----------------+----------------+----------------------------------+---------------------------------------+---------------------------------------+
 |       API Logic         |     URL         |   HTTP Method  |      Request Body Format         |           Response Body Format        |       Response data format            |
