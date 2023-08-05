@@ -40,7 +40,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Username !== ('LokiBean'))
+    if (req.user.Auth !== ('True'))
     { 
         return res.status(400).send('Only moderators can use this function.');
     }
@@ -56,7 +56,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 
  //get a user by their ID (ADMIN ONLY)
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication != ('True'))
+    if (req.user.Auth != ('True'))
     { 
         return res.status(400).send('Only moderators can use this function.');
     }
@@ -144,7 +144,7 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
 
 //Updating a movie.          (ADMIN ONLY)
 app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Authentication != ('True'))
+    if (req.user.Auth !== ('True'))
     { 
         return res.status(400).send('Only moderators can update a movies information.');
     }
@@ -269,7 +269,7 @@ async (req, res) => {
 
 //Adding a new Movie to the DB   (ADMIN ONLY)
 app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication != ('True'))
+    if (req.user.Auth != ('True'))
     { 
         return res.status(400).send('Only moderators can add new movies.');
     }
