@@ -74,7 +74,7 @@ mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifie
  app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     await Movies.find()
     .then((movie) => {
-        res.status(200).json(movie);
+        res.status(200).json(movie);         //add in admin use in the future to edit all?
     })
     .catch((err) => {
         console.error(err);
