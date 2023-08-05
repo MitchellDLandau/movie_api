@@ -34,13 +34,13 @@ const Genre = Models.Genre;
 const Directors =  Models.Director
 const Heroes = Models.Heroes
 
-// mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication !== ('True'))
+    if (req.user.Authentication != ('True'))
     { 
         return res.status(400).send('Only moderators can use this function.');
     }
@@ -56,7 +56,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 
  //get a user by their ID (ADMIN ONLY)
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication !== ('True'))
+    if (req.user.Authentication != ('True'))
     { 
         return res.status(400).send('Only moderators can use this function.');
     }
@@ -144,7 +144,7 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
 
 //Updating a movie.          (ADMIN ONLY)
 app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Authentication !== ('True'))
+    if (req.user.Authentication != ('True'))
     { 
         return res.status(400).send('Only moderators can update a movies information.');
     }
@@ -253,7 +253,7 @@ async (req, res) => {
                 Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
-                Authorized: false
+                Authentication: 'True'
                 })
             .then((user) => {res.status(200).json(user)})
             .catch((err) => {console.error(err);
@@ -269,7 +269,7 @@ async (req, res) => {
 
 //Adding a new Movie to the DB   (ADMIN ONLY)
 app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication !== ('True'))
+    if (req.user.Authentication != ('True'))
     { 
         return res.status(400).send('Only moderators can add new movies.');
     }
@@ -322,7 +322,7 @@ app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (re
 
 //Deleting a movie    (ADMIN ONLY)
 app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication !== ('True'))
+    if (req.user.Authentication != ('True'))
     { 
         return res.status(400).send('Only moderators can delete a movie.');
     }
