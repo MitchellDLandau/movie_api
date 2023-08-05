@@ -28,6 +28,8 @@ let auth = require('./auth.js')(app);
 const passport = require ('passport');
 require('./passport.js');
 
+mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifiedTopology: true});
+
 const Movies = Models.Movie;
 const Users = Models.User;
 const Genre = Models.Genre;
@@ -36,7 +38,7 @@ const Heroes = Models.Heroes
 
 //mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
