@@ -34,9 +34,9 @@ const Genre = Models.Genre;
 const Directors =  Models.Director
 const Heroes = Models.Heroes
 
-mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
-// mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
