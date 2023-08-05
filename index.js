@@ -28,8 +28,6 @@ let auth = require('./auth.js')(app);
 const passport = require ('passport');
 require('./passport.js');
 
-mongoose.connect('process.env.CONNECTION_URI', {useNewUrlParser: true, useUnifiedTopology: true});
-
 const Movies = Models.Movie;
 const Users = Models.User;
 const Genre = Models.Genre;
