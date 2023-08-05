@@ -25,7 +25,7 @@ let userSchema = mongoose.Schema({
     Email: {type: String, required: true},
     Birthday: Date,
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Movie' }],
-    Auth: {type: null}
+    Auth: {type: false}
 });
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
