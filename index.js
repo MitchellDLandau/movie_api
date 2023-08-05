@@ -269,7 +269,7 @@ async (req, res) => {
 
 //Adding a new Movie to the DB   (ADMIN ONLY)
 app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentification !== True)
+    if (req.user.Authentification !== 'True')
     { 
         return res.status(400).send('Only moderators can add new movies.');
     }
