@@ -253,7 +253,7 @@ async (req, res) => {
                 Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
-                Authentication: 'True'
+                Auth: 'False'
                 })
             .then((user) => {res.status(200).json(user)})
             .catch((err) => {console.error(err);
