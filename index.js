@@ -42,7 +42,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
  app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
     if (req.user.Auth !== true)
     { 
-        return res.status(400).send(req.user.Auth);
+        return res.status(400).send({'userObj': req.user, 'overallReq': req});
     }
     Users.find()
     .then((users) => {
