@@ -37,22 +37,40 @@ const Heroes = Models.Heroes
 // mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
-
+//set while loop with variable set that checks for the undefined
 //getting all users information (ADMIN ONLY)
- app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Admin !== 'true')
-    { 
-        return res.status(400).send('Only moderators can use this function.');
+//  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
+//     if (req.user.Admin !== 'true')
+//     { 
+//         return res.status(400).send('Only moderators can use this function.');
+//     }
+//     await Users.find()
+//     .then((users) => {
+//         res.status(200).json(users);
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//         res.status(500).send(`Error: ${err}`);
+//     });
+//  });
+//Austins timeout
+app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
+    setTimeout(function(){
+    if (req.user.Auth != true)
+    {
+    return res.status(400).send('Only moderators can use this function.');
     }
-    await Users.find()
+    Users.find()
     .then((users) => {
-        res.status(200).json(users);
+    res.status(200).json(users);
     })
     .catch((err) => {
-        console.error(err);
-        res.status(500).send(`Error: ${err}`);
+    console.error(err);
+    res.status(500).send(Error: ${err});
     });
- });
+    }, 2000);
+    });
+
 
  //get a user by their ID (ADMIN ONLY)
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
