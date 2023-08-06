@@ -40,7 +40,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (res.user.Auth !== true)
+    if (req.user.Auth !== true)
     { 
         console.log(req.user)
         return res.status(400).send(res.user.Auth);
