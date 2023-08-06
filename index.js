@@ -40,12 +40,10 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 
 //getting all users information (ADMIN ONLY)
  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Plank !== 'fork')
+    if (req.user.Admin !== true)
     { 
-        console.log(req.user['Plank'])
-        return res.status(400).send(req.user.Plank);
+        return res.status(400).send('Only moderators can use this function.');
     }
-    console.log(req.user)
     await Users.find()
     .then((users) => {
         res.status(200).json(users);
