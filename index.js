@@ -43,7 +43,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
     if (req.user.Auth !== true)
     { 
         console.log(req.user)
-        return res.status(400).send(res.user.Auth);
+        return res.status(400).send(req.user.Auth);
     }
     await Users.find()
     .then((users) => {
