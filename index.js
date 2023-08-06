@@ -39,20 +39,20 @@ const Heroes = Models.Heroes
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 //set while loop with variable set that checks for the undefined
 //getting all users information (ADMIN ONLY)
-//  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-//     if (req.user.Admin !== 'true')
-//     { 
-//         return res.status(400).send('Only moderators can use this function.');
-//     }
-//     await Users.find()
-//     .then((users) => {
-//         res.status(200).json(users);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         res.status(500).send(`Error: ${err}`);
-//     });
-//  });
+ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    if (req.user.Admin !== 'true')
+    { 
+        return res.status(400).send('Only moderators can use this function.');
+    }
+    await Users.find()
+    .then((users) => {
+        res.status(200).json(users);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send(`Error: ${err}`);
+    });
+ });
 //Austins timeout
 app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
     setTimeout(function(){
@@ -66,7 +66,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => 
     })
     .catch((err) => {
     console.error(err);
-    res.status(500).send(Error: ${err});
+    res.status(500).send(`Error: ${err}`);
     });
     }, 2000);
     });
