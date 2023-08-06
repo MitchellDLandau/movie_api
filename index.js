@@ -43,7 +43,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
     if (req.user.Plank !== 'fork')
     { 
         console.log(req.user['Plank'])
-        return res.status(400).send(req.user.Email);
+        return res.status(400).send(req.user.Plank);
     }
     console.log(req.user)
     await Users.find()
