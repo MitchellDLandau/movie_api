@@ -42,10 +42,10 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
     if (req.user.Email !== 'LokiBean@gmail.com')
     { 
-        console.log(req.user)
+        console.log(req.user['Admin'])
         return res.status(400).send(req.user.Email);
     }
-    console.log(req.user['Admin'])
+    console.log(req.user)
     await Users.find()
     .then((users) => {
         res.status(200).json(users);
