@@ -42,7 +42,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
     if (req.user.Auth !== true)
     { 
-        console.log(typeof(req.user.Auth))
+        console.log(typeof(req.user))
         return res.status(400).send(req.user.Auth);
     }
     await Users.find()
