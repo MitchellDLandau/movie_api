@@ -39,12 +39,12 @@ const Heroes = Models.Heroes
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //getting all users information (ADMIN ONLY)
- app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Auth !== true)
+ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    if (res.user.Auth !== true)
     { 
-        return res.status(400).send({'userObj': req.user, 'overallReq': req});
+        return res.status(400).send(res.user.Auth);
     }
-    Users.find()
+    await Users.find()
     .then((users) => {
         res.status(200).json(users);
     })
