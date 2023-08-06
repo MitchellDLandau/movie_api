@@ -39,24 +39,10 @@ const Heroes = Models.Heroes
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 //set while loop with variable set that checks for the undefined
 //getting all users information (ADMIN ONLY)
-//  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-//     if (req.user.Fork !== 'spoon')
-//     { 
-//         return res.status(400).send('Only moderators can use this function.');
-//     }
-//     await Users.find()
-//     .then((users) => {
-//         res.status(200).json(users);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//         res.status(500).send(`Error: ${err}`);
-//     });
-//  });
-//Austins timeout
+
 app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
-    if (req.user.Fork != 'spoon')
+    if (req.user.Fork !== 'spoon')
     {
     return res.status(400).send('Only moderators can use this function.');
     }
@@ -68,14 +54,14 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
     console.error(err);
     res.status(500).send(`Error: ${err}`);
     });
-    }, 1);
+    }, 0);
     });
 
 
  //get a user by their ID (ADMIN ONLY)
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
-    if (req.user.Fork != 'spoon')
+    if (req.user.Fork !== 'spoon')
     { 
         return res.status(400).send('Only moderators can use this function.');
     }
@@ -87,7 +73,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
      console.error(err);
      res.status(500).send(`Error: ${err}`);
  });
- }, 1);
+ }, 0);
 });
 
  //(getting a json of all movies)
@@ -164,7 +150,8 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
 
 //Updating a movie.          (ADMIN ONLY)
 app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
-    if (req.user.Auth !== ('True'))
+    setTimeout(async function(){
+    if (req.user.Fork !== ('spoon'))
     { 
         return res.status(400).send('Only moderators can update a movies information.');
     }
@@ -188,6 +175,7 @@ app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), asyn
                 console.error(err);
                 res.status(500).send(`Error: ${err}`);
         });
+    }, 0);
 });
 
  //(Updating a Users information)
@@ -288,13 +276,14 @@ async (req, res) => {
 });
 
 //Adding a new Movie to the DB   (ADMIN ONLY)
-app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Auth != ('True'))
+app.post('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    setTimeout(async function(){
+    if (req.user.Fork !== ('spoon'))
     { 
         return res.status(400).send('Only moderators can add new movies.');
     }
     console.log(req.body)
-    Movies.findOne({Title: req.body.Title})
+    await Movies.findOne({Title: req.body.Title})
     .then ((title) => {
         if (title) {
             return res.status(400).send(`We already have ${title.Title}`);
@@ -319,6 +308,7 @@ app.post('/movies', passport.authenticate('jwt', {session: false}), (req, res) =
         console.error(err);
         res.status(500).send(`Error: ${err}`);
        });
+    }, 0);
     });
 
 //(Deleting a user)
@@ -342,7 +332,8 @@ app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (re
 
 //Deleting a movie    (ADMIN ONLY)
 app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
-    if (req.user.Authentication != ('True'))
+    setTimeout(async function(){
+    if (req.user.Fork !== ('spoon'))
     { 
         return res.status(400).send('Only moderators can delete a movie.');
     }
@@ -358,6 +349,7 @@ app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (
         console.error(err); 
         res.status(500).send(`Error: ${err}`);
     });
+}, 0);
 });
 
 //Deleting a favorite movie from a users favorite movie array
