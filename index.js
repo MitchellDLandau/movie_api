@@ -40,7 +40,7 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 //set while loop with variable set that checks for the undefined
 //getting all users information (ADMIN ONLY)
 //  app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
-//     if (req.user.Admin !== 'true')
+//     if (req.user.Fork !== 'spoon')
 //     { 
 //         return res.status(400).send('Only moderators can use this function.');
 //     }
@@ -54,13 +54,13 @@ mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedT
 //     });
 //  });
 //Austins timeout
-app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
-    setTimeout(function(){
-    if (req.user.Auth != true)
+app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
+    setTimeout(async function(){
+    if (req.user.Fork != 'spoon')
     {
     return res.status(400).send('Only moderators can use this function.');
     }
-    Users.find()
+    await Users.find()
     .then((users) => {
     res.status(200).json(users);
     })
