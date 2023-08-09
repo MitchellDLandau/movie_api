@@ -34,12 +34,14 @@ const Genre = Models.Genre;
 const Directors =  Models.Director
 const Heroes = Models.Heroes
 
-// mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect('mongodb://127.0.0.1:27017/MovieDB', {useNewUrlParser: true, useUnifiedTopology: true}); 
+//Kept for local testing and can be removed. 
 
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
-//set while loop with variable set that checks for the undefined
-//getting all users information (ADMIN ONLY)
 
+//getting all users information (ADMIN ONLY)
+//The setTimeout could be replaced with a then statement in the future to streamline the code (in all admin only).
+//Get all users (ADMIN ONLY).
 app.get('/users', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
     if (req.user.Fork !== 'spoon')
@@ -58,7 +60,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
     });
 
 
- //get a user by their ID (ADMIN ONLY)
+ //Get a user by their ID (ADMIN ONLY).
  app.get('/users/:userID', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
     if (req.user.Fork !== 'spoon')
@@ -76,7 +78,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
  }, 0);
 });
 
- //(getting a json of all movies)
+ //Get a json of all movies.
  app.get('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     await Movies.find()
     .then((movie) => {
@@ -88,7 +90,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
     });
  });
 
- //(getting a movie via its ID)
+ //Get a movie via its ID.
  app.get('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({_id: req.params.movieID})
     .then ((movie) => {
@@ -104,7 +106,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
     });
  });
 
- //get movie via genre (marvel phase) name.
+ //Get a genre description by GenreName (marvel phase).
  app.get('/movies/Genre/:GenreName', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({GenreName: req.params.Name})
     .then ((genre) => {
@@ -120,7 +122,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), async (req, re
     });
  });
 
- //get director information.
+ //Get director information.
  app.get('/movies/director/:DirectorName', passport.authenticate('jwt', {session: false}), (req, res) => {
     Movies.findOne({DirectorName: req.params.Name})
     .then ((director) => {
@@ -148,7 +150,7 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', {session: false})
     });
 });
 
-//Updating a movie.          (ADMIN ONLY)
+//Updating a movie (ADMIN ONLY).
 app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
     if (req.user.Fork !== ('spoon'))
@@ -178,7 +180,7 @@ app.put('/movies/:movieID', passport.authenticate('jwt', {session: false}), asyn
     }, 0);
 });
 
- //(Updating a Users information)
+ //Updating a Users information (only when logged in as the user).
 app.put('/users/:userID', passport.authenticate('jwt', {session: false}),
 [
     check('Username', '1Username must be 6 characters').isLength({min: 6}),
@@ -214,7 +216,7 @@ app.put('/users/:userID', passport.authenticate('jwt', {session: false}),
     })    
 });
 
- //(Adding a users favorite movies) 
+ //Adding to a users favorite movies (while logged in as the user).
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), async (req, res) => {
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
@@ -235,7 +237,7 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {sessi
             });
     });
 
-//Adding a user)
+//Adding a user.
 app.post('/users', 
 [
     check('Username', 'Username is required.').isLength({min: 6}),
@@ -258,7 +260,7 @@ async (req, res) => {
             Users.create(
                 {
                 Username: req.body.Username,
-                Password: hashedPassword,
+                //Password: hashedPassword,  removed as this should not be sent back to the user. Used for testing.
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
                 Auth: 'False'
@@ -275,7 +277,7 @@ async (req, res) => {
     });
 });
 
-//Adding a new Movie to the DB   (ADMIN ONLY)
+//Adding a new Movie to the database (ADMIN ONLY).
 app.post('/movies', passport.authenticate('jwt', {session: false}), async (req, res) => {
     setTimeout(async function(){
     if (req.user.Fork !== ('spoon'))
@@ -311,7 +313,7 @@ app.post('/movies', passport.authenticate('jwt', {session: false}), async (req, 
     }, 0);
     });
 
-//(Deleting a user)
+//Deleting a user (while logged in as the user).
 app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(req.user.id !== req.params.userID){
         return res.status(400).send('Permission denied');
@@ -330,7 +332,7 @@ app.delete('/users/:userID', passport.authenticate('jwt', {session: false}), (re
     });
 });
 
-//Deleting a movie    (ADMIN ONLY)
+//Deleting a movie (ADMIN ONLY).
 app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     setTimeout(async function(){
     if (req.user.Fork !== ('spoon'))
@@ -352,7 +354,7 @@ app.delete('/movies/:movieID', passport.authenticate('jwt', {session: false}), (
 }, 0);
 });
 
-//Deleting a favorite movie from a users favorite movie array
+//Deleting a favorite movie from a users favorite movie array (While logged in as the user).
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
@@ -383,6 +385,7 @@ app.listen(port, () => {
     console.log('app running on port ' + port);
 });
 
+//Kept for local testing and can be removed. 
 // app.listen(8080, () => {
-//     console.log('running on port 8080');
+//     console.log('running on port 8080'); 
 // });
