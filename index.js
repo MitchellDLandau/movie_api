@@ -78,7 +78,7 @@ app.get('/users/:userID', passport.authenticate('jwt', { session: false }), asyn
 });
 
 //Get a json of all movies.
-app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.get('/movies', async (req, res) => { //( passport.authenticate('jwt', { session: false }),) add back after testing after '/movies',
     await Movies.find()
         .then((movie) => {
             res.status(200).json(movie);         //add in admin use in the future to edit all?
