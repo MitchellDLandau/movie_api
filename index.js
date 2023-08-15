@@ -6,7 +6,7 @@ const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -78,7 +78,7 @@ app.get('/users/:userID', passport.authenticate('jwt', { session: false }), asyn
 });
 
 //Get a json of all movies.
-app.get('/movies', async (req, res) => { //(passport.authenticate('jwt', {session: false}),)must be added back avter '/movie',
+app.get('/movies', async (req, res) => { //( passport.authenticate('jwt', { session: false }),) add back after testing after '/movies',
     await Movies.find()
         .then((movie) => {
             res.status(200).json(movie);         //add in admin use in the future to edit all?
