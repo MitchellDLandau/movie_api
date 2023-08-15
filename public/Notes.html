@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+API Application
+Durring this project I made the server side API that will be used to help run my Marvel movie application. I was
+directed to have endpoints that can allow you to log in, view all movies, add and remove a movie from your favorites,
+update your information, and delete your account in this project. With all of this functionality I plan to be able to
+make a movie application that can access all of the information stored in a MongoDB database while the API is hosted on
+another website.
+
+As I was focussing on the brief I decided I wanted to add extra functionality. I added an admin function so that
+specified endpoints can only be accessed if you have been made an admin. Admins can post new movies, update movies, get
+all users, find a specific user, and delete movies from the database. This was something that was not asked of me
+however I researched the methods I could use to do this and came up with a functional API that can have a moderator
+level (can use the endpoints listed previously) and an admin level (can directly edit the database itself and create
+admins). I also added extra functionality with the addition of an endpoint that will return all movies a given hero
+stars in.
+
+The admin function was the hardest portion for me to do in this whole application as it added many endpoints as well as
+adding another layer of functions that I had to restrict to specific users. I also heavily focused on security so that
+no user can add unexpected information with any of their logins or puts being made to the database. This was a very
+interesting task and allowed me to branch out into more capable server side programming than was needed for an
+introduction to node.js and server side programming. I look forward to working on server side applications in the future
+as this was very interseting and fun to troubleshoot.
