@@ -11,8 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:1234'//, 'http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'
-];
+let allowedOrigins = ['http://localhost:1234', 'http://localhost:8080'];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -79,10 +78,10 @@ app.get('/users/:userID', passport.authenticate('jwt', { session: false }), asyn
 });
 
 //Get a json of all movies.
-app.get('/movies', async (req, res) => { //( passport.authenticate('jwt', { session: false }),) add back after testing after '/movies',
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.find()
         .then((movie) => {
-            res.status(200).json(movie);         //add in admin use in the future to edit all?
+            res.status(200).json(movie);
         })
         .catch((err) => {
             console.error(err);
