@@ -184,7 +184,7 @@ app.put('/users/:userID', passport.authenticate('jwt', { session: false }),
     [
         check('Username', '1Username must be 6 characters').isLength({ min: 6 }),
         check('Username', '1Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-        check('Password', '1Password is required.').not().isEmpty(),
+        check('Password', 'Password is required.').not().isEmpty(),
         check('Email', '1Email does not seem to be valid.').isEmail()
     ],
     async (req, res) => {
@@ -261,7 +261,7 @@ app.post('/users',
                     Users.create(
                         {
                             Username: req.body.Username,
-                            //Password: hashedPassword,  removed as this should not be sent back to the user. Used for testing.
+                            Password: hashedPassword,  //removed as this should not be sent back to the user. Used for testing.
                             Email: req.body.Email,
                             Birthday: req.body.Birthday,
                             Auth: 'False'
