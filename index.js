@@ -40,9 +40,8 @@ const Heroes = Models.Heroes
 
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-//getting all users information (ADMIN ONLY)
 //The setTimeout could be replaced with a then statement in the future to streamline the code (in all admin only).
-//Get all users (ADMIN ONLY).
+//getting all users information (ADMIN ONLY)
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
     setTimeout(async function () {
         if (req.user.Fork !== 'spoon') {
