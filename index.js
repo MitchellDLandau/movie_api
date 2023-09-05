@@ -59,21 +59,16 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
 });
 
 
-//Get a user by their ID (ADMIN ONLY).
+//Get a user by their ID.
 app.get('/users/:userID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    setTimeout(async function () {
-        if (req.user.Fork !== 'spoon') {
-            return res.status(400).send('Only moderators can use this function.');
-        }
-        await Users.findOne({ _id: req.params.userID })
-            .then((user) => {
-                res.json(user);
-            })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).send(`Error: ${err}`);
-            });
-    }, 0);
+    await Users.findOne({ _id: req.params.userID })
+        .then((user) => {
+            res.json(user);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send(`Error: ${err}`);
+        });
 });
 
 //Get a json of all movies.
@@ -265,7 +260,7 @@ app.post('/users',
                             Birthday: req.body.Birthday,
                             Auth: 'False'
                         })
-                        .then((user) => { res.status(200).json(user) })
+                        .then((user) => { res.status(200).json(user) }) //How can I have it return the whole user minus the password.
                         .catch((err) => {
                             console.error(err);
                             res.status(500).send(`Error: ${err}`);
