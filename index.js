@@ -59,7 +59,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
 });
 
 
-//Get a user by their ID.
+//Get a user by their ID. May need to return this to an (ADMIN ONLY) function but removed for testing.
 app.get('/users/:userID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOne({ _id: req.params.userID })
         .then((user) => {
