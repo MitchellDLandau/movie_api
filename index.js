@@ -262,7 +262,7 @@ app.post('/users',
                         })
                         .then((user) => {
                             const userWithoutPassword = { ...user._doc };
-                            delete userWithoutPassword.password;
+                            delete userWithoutPassword.Password;
                             res.status(200).json(userWithoutPassword)
                         }) //How can I have it return the whole user minus the password.
                         .catch((err) => {
