@@ -255,6 +255,7 @@ app.post('/users',
                     Users.create(
                         {
                             Username: req.body.Username,
+                            Password: hashedPassword,  //removed as this should not be sent back to the user. Used for testing.
                             Email: req.body.Email,
                             Birthday: req.body.Birthday,
                             Auth: 'False'
