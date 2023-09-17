@@ -260,7 +260,11 @@ app.post('/users',
                             Birthday: req.body.Birthday,
                             Auth: 'False'
                         })
-                        .then((user) => { res.status(200).json(user) }) //How can I have it return the whole user minus the password.
+                        .then((user) => {
+                            const userWithoutPassword = { ...user._doc };
+                            delete userWithoutPassword.password;
+                            res.status(200).json(userWithoutPassword)
+                        }) //How can I have it return the whole user minus the password.
                         .catch((err) => {
                             console.error(err);
                             res.status(500).send(`Error: ${err}`);
