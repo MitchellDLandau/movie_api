@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:1234', 'http://localhost:8080'];
+let allowedOrigins = ['http://localhost:1234', 'http://localhost:8080', 'https://marvel-movie-mapper.netlify.app'];
 
 app.use(cors({
     origin: (origin, callback) => {
