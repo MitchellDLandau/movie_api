@@ -293,9 +293,9 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), async (req
                         {
                             Title: req.body.Title,
                             Description: req.body.Description,
-                            Genre: req.body.Genre,
-                            Director: req.body.Director,
-                            ImagePath: req.body.imagePath,
+                            Genre: { Name: req.body.Genre },
+                            Director: { Name: req.body.Director },
+                            ImagePath: req.body.ImagePath,
                             Heroes: req.body.Heroes,
                             Villain: req.body.Villain
                         })
