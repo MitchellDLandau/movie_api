@@ -14,7 +14,7 @@ const cors = require('cors');
 let allowedOrigins = ['http://localhost:1234',
     'http://localhost:8080',
     'https://marvel-movie-mapper.netlify.app',
-    'https://mitchelldlandau.github.io/myflix-angular-app'
+    'https://mitchelldlandau.github.io/myflix-angular-app/welcome'
 ];
 
 app.use(cors({
