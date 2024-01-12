@@ -94,6 +94,970 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="Delete/movies/:movieID"><span class="type-signature"></span>Delete /movies/:movieID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles deleting a movie from the database if admin.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line654">line 654</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>response data format
+string "{Title} has been removed."</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Delete/users/:Username/movies/:MovieID"><span class="type-signature"></span>Delete /users/:Username/movies/:MovieID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles deleting a movie from the users favorite array.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line691">line 691</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>response data format
+string "{MovieID} has been removed."</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Delete/users/:userID"><span class="type-signature"></span>Delete /users/:userID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles deleting a users account.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line619">line 619</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>response data format
+string "{username} was not found."</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/movies"><span class="type-signature"></span>Get /movies<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Get all movies
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Actors": [ObjectID],
+  "ImagePath": "",
+  "Featured": Boolean,
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/movies/:movieID"><span class="type-signature"></span>Get /movies/:movieID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles requesting a movie.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line155">line 155</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Actors": [ObjectID],
+  "ImagePath": "",
+  "Featured": Boolean,
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/movies/Heroes/:Heroes"><span class="type-signature"></span>Get /movies/Heroes/:Heroes<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles requesting movies a hero is in.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Heroes": [ObjectID],
+  "ImagePath": "",
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/movies/director/:DirectorName"><span class="type-signature"></span>Get /movies/director/:DirectorName<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles requesting a directors information.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line230">line 230</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+     "name": "",
+     "Bio": ""
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/users"><span class="type-signature"></span>Get /users<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles requesting a single users information.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Get/users/:userID"><span class="type-signature"></span>Get /users/:userID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles requesting a single users information.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line86">line 86</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Post/login"><span class="type-signature"></span>Post /login<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles login request.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth.js.html">auth.js</a>, <a href="auth.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>request data format
+{
+     Username: "",
+     Password: ""
+}</code></pre>
+
+    <pre class="prettyprint"><code>response data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}
+{
+     "Authentication": "JWT"
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Post/movies"><span class="type-signature"></span>Post /movies<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles adding a movie in the database.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line551">line 551</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Request data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Heroes": [ObjectID],
+  "ImagePath": "",
+}</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Heroes": [ObjectID],
+  "ImagePath": "",
+}</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="Put/movies/:movieID"><span class="type-signature"></span>Put /movies/:movieID<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Handles updating a movie in the database.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line306">line 306</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
+
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)
+ * @example
+body data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Heroes": [ObjectID],
+  "ImagePath": "",
+}
+ * @example
+Response data format
+{
+  _id: ObjectID
+  "Title": "",
+  "Description": "",
+  "Genre": ObjectID,
+  "Director": [ObjectID],
+  "Heroes": [ObjectID],
+  "ImagePath": "",
+}</code></pre>
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -104,7 +1068,7 @@
     
 
     
-    <h4 class="name" id="AddAMovie"><span class="type-signature"></span>AddAMovie<span class="signature">(req)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
+    <h4 class="name" id="Get/movies/Genre/:GenreName"><span class="type-signature"></span>Get /movies/Genre/:GenreName<span class="signature">(GenreName)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
     
 
     
@@ -112,7 +1076,7 @@
 
 
 <div class="description">
-    Handles adding a movie in the database.
+    Handles requesting a genres information.
 </div>
 
 
@@ -148,7 +1112,7 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>GenreName</code></td>
             
 
             <td class="type">
@@ -164,7 +1128,7 @@
 
             
 
-            <td class="description last">request to add a new movie.</td>
+            <td class="description last">The genre's name that info is being requested for.</td>
         </tr>
 
     
@@ -205,7 +1169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line383">line 383</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line193">line 193</a>
     </li></ul></dd>
     
 
@@ -235,7 +1199,7 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Error if movie was not added.
+        If the genre is not in the database.
         </div>
     </dt>
     <dd></dd>
@@ -262,7 +1226,10 @@
 <dl>
     <dt>
         <div class="param-desc">
-        Error if user logged in is not a admin.
+        Error if not a propper token or user.
+ * @example
+Request data format
+none
         </div>
     </dt>
     <dd></dd>
@@ -290,7 +1257,7 @@
 <ul>
         <li>
 <div class="param-desc">
-    A promise that resolves when the movie is added.
+    A promise that resolves when request is complete.
 </div>
 
 
@@ -310,7 +1277,7 @@
     
         <li>
 <div class="param-desc">
-    Returns the movie in JSON.
+    Returns the requested info in JSON.
 </div>
 
 
@@ -332,6 +1299,18 @@
 
 
 
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+     "Name": "",
+     "GenreDescription": """
+     
+}</code></pre>
+
+
 
         
             
@@ -339,7 +1318,7 @@
     
 
     
-    <h4 class="name" id="AddNewUser"><span class="type-signature"></span>AddNewUser<span class="signature">(req)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
+    <h4 class="name" id="Post/users"><span class="type-signature"></span>Post /users<span class="signature">(req)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
     
 
     
@@ -440,7 +1419,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line329">line 329</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line480">line 480</a>
     </li></ul></dd>
     
 
@@ -567,6 +1546,26 @@
 
 
 
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Request data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+ "Username": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+
 
         
             
@@ -574,7 +1573,7 @@
     
 
     
-    <h4 class="name" id="AddToFavorites"><span class="type-signature"></span>AddToFavorites<span class="signature">(Username, MovieID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
+    <h4 class="name" id="Post/users/:Username/movies/:MovieID"><span class="type-signature"></span>Post /users/:Username/movies/:MovieID<span class="signature">(Username, MovieID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
     
 
     
@@ -698,7 +1697,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line297">line 297</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line435">line 435</a>
     </li></ul></dd>
     
 
@@ -825,2635 +1824,20 @@
 
 
 
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DeleteAMovie"><span class="type-signature"></span>DeleteAMovie<span class="signature">(movieID)</span><span class="type-signature"> &rarr; {Promise|String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles deleting a movie from the database if admin.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>movieID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The movieID for the movie being deleted.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line456">line 456</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if user logged in is not a admin.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if movie is not in the database.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    That the movie has been deleted.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DeleteAUser"><span class="type-signature"></span>DeleteAUser<span class="signature">(userID)</span><span class="type-signature"> &rarr; {Promise|String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles deleting a users account.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>userID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The userID for the user being deleted.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line428">line 428</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not deleted or server error.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when the user is deleted.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns that the user was deleted.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DeleteFavorite"><span class="type-signature"></span>DeleteFavorite<span class="signature">(Username, movieID)</span><span class="type-signature"> &rarr; {Promise|String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles deleting a movie from the users favorite array.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The username for the user.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>movieID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The movieID for the movie being removed.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line486">line 486</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if movie is not in their favorites.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when the movie is removed.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    That the movie has been removed from the users array.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetAMovies"><span class="type-signature"></span>GetAMovies<span class="signature">(movieID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting a movie.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>movieID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The movies unique ID.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line116">line 116</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the movie is not in the database.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested movie in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetAUsers"><span class="type-signature"></span>GetAUsers<span class="signature">(username)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting a single users information.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">has to be at least six characters</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line47">line 47</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not admin returns string.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error response if the user is not found.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves if user is an admin.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested user in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetAllMovies"><span class="type-signature"></span>GetAllMovies<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting all movies.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Requesting all movies in the database.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Responds with json of all movies.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line95">line 95</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested movies in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetDirector"><span class="type-signature"></span>GetDirector<span class="signature">(DirectoreName)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting a directors information.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>DirectoreName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The director's name that info is being requested for.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line166">line 166</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the director is not in the database.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested info in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetGenre"><span class="type-signature"></span>GetGenre<span class="signature">(GenreName)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting a genres information.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>GenreName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The genre's name that info is being requested for.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line141">line 141</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the genre is not in the database.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested info in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetHero"><span class="type-signature"></span>GetHero<span class="signature">(Heroes)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting movies a hero is in.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>Heroes</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The heroes name that info is being requested for.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line191">line 191</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the hero is not in the database.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested info in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="GetYourUserInfo"><span class="type-signature"></span>GetYourUserInfo<span class="signature">(userID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles requesting a single users information.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>userID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Users id number.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line73">line 73</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not the user who requested the info.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error response if the user is not found.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves if user is found.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    Returns the requested user in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="UpdateAMovie"><span class="type-signature"></span>UpdateAMovie<span class="signature">(movieID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Handles updating a movie in the database.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>movieID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The movieID for the movie being updated.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line212">line 212</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if not a propper token or user.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    
-        <li>
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        Error if user logged in is not a admin.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">String</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    A promise that resolves when request is complete.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-</li>
+    <h5>Examples</h5>
     
-        <li>
-<div class="param-desc">
-    Returns the movie in JSON.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
+    <pre class="prettyprint"><code>Request data format
+none</code></pre>
 
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
 
+    <pre class="prettyprint"><code>Response data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
 
 
 
@@ -3463,7 +1847,7 @@
     
 
     
-    <h4 class="name" id="UpdateAUser"><span class="type-signature"></span>UpdateAUser<span class="signature">(userID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
+    <h4 class="name" id="Put/users/:userID"><span class="type-signature"></span>Put /users/:userID<span class="signature">(userID)</span><span class="type-signature"> &rarr; {Promise|Object}</span></h4>
     
 
     
@@ -3564,7 +1948,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line251">line 251</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line371">line 371</a>
     </li></ul></dd>
     
 
@@ -3691,6 +2075,27 @@
 
 
 
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>Authentication: Bearer token (JWT)</code></pre>
+
+    <pre class="prettyprint"><code>Request data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+    <pre class="prettyprint"><code>Response data format
+{
+ "Username": "",
+ "Password": "",
+ "Email": "",
+ "Birthday:" ""
+}</code></pre>
+
+
 
         
     
@@ -3708,13 +2113,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddAMovie">AddAMovie</a></li><li><a href="global.html#AddNewUser">AddNewUser</a></li><li><a href="global.html#AddToFavorites">AddToFavorites</a></li><li><a href="global.html#DeleteAMovie">DeleteAMovie</a></li><li><a href="global.html#DeleteAUser">DeleteAUser</a></li><li><a href="global.html#DeleteFavorite">DeleteFavorite</a></li><li><a href="global.html#GetAMovies">GetAMovies</a></li><li><a href="global.html#GetAUsers">GetAUsers</a></li><li><a href="global.html#GetAllMovies">GetAllMovies</a></li><li><a href="global.html#GetDirector">GetDirector</a></li><li><a href="global.html#GetGenre">GetGenre</a></li><li><a href="global.html#GetHero">GetHero</a></li><li><a href="global.html#GetYourUserInfo">GetYourUserInfo</a></li><li><a href="global.html#UpdateAMovie">UpdateAMovie</a></li><li><a href="global.html#UpdateAUser">UpdateAUser</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Delete/movies/:movieID">Delete /movies/:movieID</a></li><li><a href="global.html#Delete/users/:Username/movies/:MovieID">Delete /users/:Username/movies/:MovieID</a></li><li><a href="global.html#Delete/users/:userID">Delete /users/:userID</a></li><li><a href="global.html#Get/movies">Get /movies</a></li><li><a href="global.html#Get/movies/:movieID">Get /movies/:movieID</a></li><li><a href="global.html#Get/movies/Genre/:GenreName">Get /movies/Genre/:GenreName</a></li><li><a href="global.html#Get/movies/Heroes/:Heroes">Get /movies/Heroes/:Heroes</a></li><li><a href="global.html#Get/movies/director/:DirectorName">Get /movies/director/:DirectorName</a></li><li><a href="global.html#Get/users">Get /users</a></li><li><a href="global.html#Get/users/:userID">Get /users/:userID</a></li><li><a href="global.html#Post/login">Post /login</a></li><li><a href="global.html#Post/movies">Post /movies</a></li><li><a href="global.html#Post/users">Post /users</a></li><li><a href="global.html#Post/users/:Username/movies/:MovieID">Post /users/:Username/movies/:MovieID</a></li><li><a href="global.html#Put/movies/:movieID">Put /movies/:movieID</a></li><li><a href="global.html#Put/users/:userID">Put /users/:userID</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Jan 11 2024 17:45:53 GMT-0500 (Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jan 12 2024 17:59:20 GMT-0500 (Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -45,14 +45,27 @@ const Heroes = Models.Heroes
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 /**
- * Handles requesting a single users information.
- * @function
- * @name GetAUsers
+ * @description Handles requesting a single users information.
+ * @name Get /users
  * @param {Object} username has to be at least six characters
  * @returns {Promise} A promise that resolves if user is an admin.
  * @returns {Object} Returns the requested user in JSON.
  * @throws {String} Error if not admin returns string.
  * @throws {Error} Error response if the user is not found.
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
+
  */
 app.get('/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
     setTimeout(async function () {
@@ -71,14 +84,26 @@ app.get('/users', passport.authenticate('jwt', { session: false }), async (req, 
 });
 
 /**
- * Handles requesting a single users information.
- * @function
- * @name GetYourUserInfo
+ * @description Handles requesting a single users information.
+ * @name Get /users/:userID
  * @param {string} userID Users id number.
  * @returns {Promise} A promise that resolves if user is found.
  * @returns {Object} Returns the requested user in JSON.
  * @throws {String} Error if not the user who requested the info.
  * @throws {Error} Error response if the user is not found.
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
  */
 
 app.get('/users/:userID', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -93,15 +118,29 @@ app.get('/users/:userID', passport.authenticate('jwt', { session: false }), asyn
 });
 
 /**
- * Handles requesting all movies.
- * @function
- * @name GetAllMovies
- * @param {Object} req Requesting all movies in the database.
- * @param {Object} res Responds with json of all movies. 
- * @returns {Promise} A promise that resolves when request is complete.
- * @returns {Object} Returns the requested movies in JSON.
- * @throws {String} Error if not a propper token or user.
+ * @description Get all movies
+ * @name Get /movies
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Actors": [ObjectID],
+ *   "ImagePath": "",
+ *   "Featured": Boolean,
+ * }
  */
+
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.find()
         .then((movie) => {
@@ -114,14 +153,27 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
 });
 
 /**
- * Handles requesting a movie.
- * @function
- * @name GetAMovies
+ * @description Handles requesting a movie.
+ * @name Get /movies/:movieID
  * @param {Object} movieID The movies unique ID.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the requested movie in JSON.
  * @throws {String} If the movie is not in the database. 
  * @throws {String} Error if not a propper token or user.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Actors": [ObjectID],
+ *   "ImagePath": "",
+ *   "Featured": Boolean,
+ * }
  */
 app.get('/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ _id: req.params.movieID })
@@ -141,12 +193,24 @@ app.get('/movies/:movieID', passport.authenticate('jwt', { session: false }), (r
 /**
  * Handles requesting a genres information.
  * @function
- * @name GetGenre
+ * @name Get /movies/Genre/:GenreName
  * @param {Object} GenreName The genre's name that info is being requested for.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the requested info in JSON.
  * @throws {String} If the genre is not in the database. 
  * @throws {String} Error if not a propper token or user.
+ *  * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *      "Name": "",
+ *      "GenreDescription": """
+ *      
+ * }
  */
 app.get('/movies/Genre/:GenreName', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ GenreName: req.params.Name })
@@ -164,14 +228,24 @@ app.get('/movies/Genre/:GenreName', passport.authenticate('jwt', { session: fals
 });
 
 /**
- * Handles requesting a directors information.
- * @function
- * @name GetDirector
+ * @description Handles requesting a directors information.
+ * @name Get /movies/director/:DirectorName
  * @param {Object} DirectoreName The director's name that info is being requested for.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the requested info in JSON.
  * @throws {String} If the director is not in the database. 
  * @throws {String} Error if not a propper token or user.
+ *  * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *      "name": "",
+ *      "Bio": ""
+ * }
  */
 app.get('/movies/director/:DirectorName', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ DirectorName: req.params.Name })
@@ -189,14 +263,34 @@ app.get('/movies/director/:DirectorName', passport.authenticate('jwt', { session
 });
 
 /**
- * Handles requesting movies a hero is in.
- * @function
- * @name GetHero
+ * @description Handles requesting movies a hero is in.
+ * @name Get /movies/Heroes/:Heroes
  * @param {Object} Heroes The heroes name that info is being requested for.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the requested info in JSON.
  * @throws {String} If the hero is not in the database. 
  * @throws {String} Error if not a propper token or user.
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Response data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Heroes": [ObjectID],
+ *   "ImagePath": "",
+ * }
  */
 app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find({ Heroes: req.params.Heroes })
@@ -210,14 +304,40 @@ app.get('/movies/Heroes/:Heroes', passport.authenticate('jwt', { session: false 
 });
 
 /**
- * Handles updating a movie in the database.
- * @function
- * @name UpdateAMovie
+ * @description Handles updating a movie in the database.
+ * @name Put /movies/:movieID
  * @param {Object} movieID The movieID for the movie being updated.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the movie in JSON.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if user logged in is not a admin.
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ *  * @example
+ * body data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Heroes": [ObjectID],
+ *   "ImagePath": "",
+ * }
+ *  * @example
+ * Response data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Heroes": [ObjectID],
+ *   "ImagePath": "",
+ * }
  */
 app.put('/movies/:movieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     setTimeout(async function () {
@@ -251,12 +371,30 @@ app.put('/movies/:movieID', passport.authenticate('jwt', { session: false }), as
 /**
  * Handles updating a users info in the database.
  * @function
- * @name UpdateAUser
+ * @name Put /users/:userID
  * @param {Object} userID The userID for the user being updated.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the user in JSON.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if not the correct user who requested the change.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Request data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
+ * @example 
+ * Response data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
  */
 app.put('/users/:userID', passport.authenticate('jwt', { session: false }),
     [
@@ -295,15 +433,28 @@ app.put('/users/:userID', passport.authenticate('jwt', { session: false }),
     });
 
 /**
- * Handles adding a movie to their favorite movies array.
+ * @description Handles adding a movie to their favorite movies array.
  * @function
- * @name AddToFavorites
+ * @name Post /users/:Username/movies/:MovieID
  * @param {Object} Username The Username for the user being updated.
  * @param {Object} MovieID The MovieID for the user being updated.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the user in JSON.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if not the correct user who requested the change.
+ * @example
+ * Request data format
+ * none
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example 
+ * Response data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
  */
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     if (req.user.Username !== req.params.Username) {
@@ -327,14 +478,31 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 /**
- * Handles adding a new user.
+ * @description Handles adding a new user.
  * @function
- * @name AddNewUser
+ * @name Post /users
  * @param {Object} req requesting that a new user be created.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {Object} Returns the user in JSON.
  * @throws {String} Error if the user already exists.
  * @throws {String} Error if server error.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example 
+ * Request data format
+ * {
+ *  "Username": "",
+ *  "Password": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
+ * @example 
+ * Response data format
+ * {
+ *  "Username": "",
+ *  "Email": "",
+ *  "Birthday:" ""
+ * }
  */
 app.post('/users',
     [
@@ -381,14 +549,37 @@ app.post('/users',
     });
 
 /**
- * Handles adding a movie in the database.
- * @function
- * @name AddAMovie
+ * @description Handles adding a movie in the database.
+ * @name Post /movies
  * @param {Object} req request to add a new movie.
  * @returns {Promise} A promise that resolves when the movie is added.
  * @returns {Object} Returns the movie in JSON.
  * @throws {String} Error if movie was not added.
  * @throws {String} Error if user logged in is not a admin.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example
+ * Request data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Heroes": [ObjectID],
+ *   "ImagePath": "",
+ * }
+ * @example
+ * Response data format
+ * {
+ *   _id: ObjectID
+ *   "Title": "",
+ *   "Description": "",
+ *   "Genre": ObjectID,
+ *   "Director": [ObjectID],
+ *   "Heroes": [ObjectID],
+ *   "ImagePath": "",
+ * }
  */
 app.post('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     setTimeout(async function () {
@@ -426,14 +617,21 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), async (req
 });
 
 /**
- * Handles deleting a users account.
- * @function
- * @name DeleteAUser
+ * @description Handles deleting a users account.
+ * @name Delete /users/:userID
  * @param {Object} userID The userID for the user being deleted.
  * @returns {Promise} A promise that resolves when the user is deleted.
  * @returns {String} Returns that the user was deleted.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if not deleted or server error.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example 
+ * request data format
+ * none
+ * @example 
+ * response data format
+ * string "{username} was not found."
  */
 app.delete('/users/:userID', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user.id !== req.params.userID) {
@@ -454,15 +652,22 @@ app.delete('/users/:userID', passport.authenticate('jwt', { session: false }), (
 });
 
 /**
- * Handles deleting a movie from the database if admin.
- * @function
- * @name DeleteAMovie
+ * @description Handles deleting a movie from the database if admin.
+ * @name Delete /movies/:movieID
  * @param {Object} movieID The movieID for the movie being deleted.
  * @returns {Promise} A promise that resolves when request is complete.
  * @returns {String} That the movie has been deleted.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if user logged in is not a admin.
  * @throws {String} Error if movie is not in the database.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example 
+ * request data format
+ * none
+ * @example 
+ * response data format
+ * string "{Title} has been removed."
  */
 app.delete('/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     setTimeout(async function () {
@@ -484,15 +689,22 @@ app.delete('/movies/:movieID', passport.authenticate('jwt', { session: false }),
     }, 0);
 });
 /**
- * Handles deleting a movie from the users favorite array.
- * @function
- * @name DeleteFavorite
+ * @description Handles deleting a movie from the users favorite array.
+ * @name Delete /users/:Username/movies/:MovieID
  * @param {Object} Username The username for the user.
  * @param {Object} movieID The movieID for the movie being removed.
  * @returns {Promise} A promise that resolves when the movie is removed.
  * @returns {String} That the movie has been removed from the users array.
  * @throws {String} Error if not a propper token or user.
  * @throws {String} Error if movie is not in their favorites.
+ * @example
+ * Authentication: Bearer token (JWT)
+ * @example 
+ * request data format
+ * none
+ * @example 
+ * response data format
+ * string "{MovieID} has been removed."
  */
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     if (req.user.Username !== req.params.Username) {
